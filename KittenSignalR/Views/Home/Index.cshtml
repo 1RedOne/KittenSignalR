@@ -8,22 +8,59 @@
 </div>
 
 <div class="container">
-    <div class="row">&nbsp;</div>
     <div class="row">
-        <div class="col-2">User</div>
-        <div class="col-4"><input type="text" id="userInput" /></div>
-    </div>
-    <div class="row">
-        <div class="col-2">Message</div>
-        <div class="col-4"><input type="text" id="messageInput" /></div>
-    </div>
-    <div class="row">&nbsp;</div>
-    <div class="row">
-        <div class="col-6">
-            <input type="button" id="sendButton" value="Send Message" />
+        <div class="col-4">
+            <h3>SignalR Chat</h3>
+            <div class="row">
+                <div class="col-2">User</div>
+                <div class="col-4"><input type="text" id="userInput" /></div>
+            </div>
+            <div class="row">
+                <div class="col-2">Message</div>
+                <div class="col-4"><input type="text" id="messageInput" /></div>
+            </div>
+            <div class="row">&nbsp;</div>
+            <div class="row">
+                <div class="col-6">
+                    <input type="button" id="sendButton" value="Send Message" />
+                </div>
+            </div>
+        </div>
+        <div class="col-8">
+            <h3>Upload Tools</h3>
+            <div class="row">
+                <div class="col-4">Post Test</div>
+                <div class="col-4"><button class="btn btn-primary" type="button" onClick="TestClick()">Test Post</button></div>
+            </div>
+            <div class="row">
+                <div class="col-4">File Upload Test</div>
+                <div class="col-4">
+                    <form action="Home/Upload"
+                          enctype="multipart/form-data" onsubmit="AJAXSubmit(this);return false;"
+                          method="post">
+                        <dl>
+                            <dt>
+                                <label for="FileUpload.FormFile">File</label>
+                            </dt>
+                            <dd>
+                                <input id="FileUpload.FormFile" type="file"
+                                       name="FileUpload.FormFile" />
+                            </dd>
+                        </dl>
+
+                        <input class="btn btn-primary" type="submit" value="Upload" />
+
+                        <div style="margin-top:15px">
+                            <output name="result"></output>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+            
         </div>
     </div>
-</div>
+
 <div class="row">
     <div class="col-12">
         <hr />
@@ -36,8 +73,10 @@
 </div>
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
 <script src="~/js/chat.js"></script>
+<div class="bg-img">
+    <img src="~/img/rocket.jpg" width="1200" height="600" />
+</div>
 
-<button class="btn btn-primary" type="button" onClick="TestClick()">Test Post</button>
 
 <script>
     function TestClick() {
@@ -53,25 +92,7 @@
     }
 </script>
 
-<form action="OnPostUploadAsync"
-      enctype="multipart/form-data" onsubmit="AJAXSubmit(this);return false;"
-      method="post">
-    <dl>
-        <dt>
-            <label for="FileUpload_FormFile">File</label>
-        </dt>
-        <dd>
-            <input id="FileUpload_FormFile" type="file"
-                   name="FileUpload.FormFile" />
-        </dd>
-    </dl>
 
-    <input class="btn btn-primary" type="submit" value="Upload" />
-
-    <div style="margin-top:15px">
-        <output name="result"></output>
-    </div>
-</form>
 
 <script>
     async function AJAXSubmit(oFormElement) {
@@ -81,7 +102,8 @@
         try {
             const response = await fetch(oFormElement.action, {
                 method: 'POST',
-                body: formData,location: "Home/OnPostUploadAsync"
+                body: formData,
+                location: "Upload"
             });
 
             if (response.ok) {
@@ -95,3 +117,26 @@
         }
     }
 </script>
+
+
+<style>
+    .bg-img {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: url("https://unsplash.it/1200x800") center center no-repeat;
+        background-size: cover;
+    }
+
+        .bg-img:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-image: linear-gradient(90deg, #0099FF 0%, #6610f2 100%);
+            opacity: .6;
+        }
+    
+</style>

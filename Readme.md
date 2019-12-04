@@ -11,23 +11,23 @@ Test project to upload a zip file and then return results back to use immediatel
 
 ✔ - Add Signal R
 
+✔ - Add file upload to Index
 
+✔ - Fix posting to the wrong endpoint
+
+✔ - Add file upload endpoint
 ## In Progress
 
-🤔- seems to be posting to the wrong endpoint :( 
-
-* Add file upload endpoint
-
-* Add file upload to Index
+* Add zip support
 
 
 ## To Do 
 
-* Add sync file uplaod on bootstrap button click
+* when parsing each file, send back 'Processing File X of Y', add a progress bar 
 
 * get token to send message back to just this user 
 
 * randomize value for file completion based on bunch of files by length
 
-* when parsing each file, send back 'Processing File X of Y', add a progress bar 
+
 

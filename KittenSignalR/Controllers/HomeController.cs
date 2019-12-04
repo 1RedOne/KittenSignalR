@@ -25,20 +25,30 @@ namespace KittenSignalR.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Ham()
         {
             return View();
         }
 
+        public IActionResult Privacy()
+        {
+            return View();
+        }
         public JsonResult PostTest()
         {
             string output = "Completed";
             return Json(output);
-            
+
+        }
+        [HttpGet]
+        public IActionResult Upload()
+        {
+            return View();
+
         }
 
         [HttpPost]
-        public async Task<IActionResult> OnPostUploadAsync(List<IFormFile> files)
+        public async Task<IActionResult> Upload(List<IFormFile> files)
         {
             long size = files.Sum(f => f.Length);
 
@@ -60,7 +70,7 @@ namespace KittenSignalR.Controllers
 
             return Ok(new { count = files.Count, size });
         }
-        
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
