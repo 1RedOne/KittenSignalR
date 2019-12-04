@@ -2,15 +2,15 @@
 
 Test project to upload a zip file and then return results back to use immediately over SingalR while we process the zip file
 
-## To Do 
 
-* Add sync file uplaod on bootstrap button click
+## Done
 
-* get token to send message back to just this user 
+✔ - Scaffold button click to AJAX Post
 
-* randomize value for file completion based on bunch of files by length
+✔ - Signal R working
 
-* when parsing each file, send back 'Processing File X of Y', add a progress bar 
+✔ - Add Signal R
+
 
 ## In Progress
 
@@ -21,10 +21,13 @@ Test project to upload a zip file and then return results back to use immediatel
 * Add file upload to Index
 
 
-## To Done
+## To Do 
 
-✔ - Scaffold button click to AJAX Post
+* Add sync file uplaod on bootstrap button click
 
-✔ - Signal R working
+* get token to send message back to just this user 
 
-✔ - Add Signal R
+* randomize value for file completion based on bunch of files by length
+
+* when parsing each file, send back 'Processing File X of Y', add a progress bar 
+

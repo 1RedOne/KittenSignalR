@@ -32,7 +32,8 @@ namespace KittenSignalR.Controllers
 
         public JsonResult PostTest()
         {
-            return new JsonResult(new {Result = "Yes!" }
+            string output = "Completed";
+            return Json(output, JsonRequestBehavior.AllowGet);
             );
         }
 
