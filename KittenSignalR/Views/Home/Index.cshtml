@@ -7,6 +7,23 @@
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 
+<div class="modal fade in" tabindex="-1" role="dialog" id="ProcessingModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    Upload In progress
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="col-6">
+                    <ul id="progressList"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="container">
     <div class="row">
         <div class="col-4">
@@ -43,6 +60,7 @@
                                 <label for="FileUpload.FormFile">File</label>
                             </dt>
                             <dd>
+                                <input id="FileCount" type="text" placeholder="Enter file count" name="FileCount"/>
                                 <input id="FileUpload.FormFile" type="file"
                                        name="FileUpload.FormFile" />
                             </dd>
@@ -100,15 +118,13 @@
         const formData = new FormData(oFormElement);
 
         try {
+            $('#ProcessingModal').modal({ backdrop: 'static', keyboard: false });
             const response = await fetch(oFormElement.action, {
                 method: 'POST',
                 body: formData,
                 location: "Upload"
             });
-
-            if (response.ok) {
-                window.location.href = '/';
-            }
+            
 
             resultElement.value = 'Result: ' + response.status + ' ' +
                 response.statusText;
