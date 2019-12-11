@@ -16,9 +16,16 @@ Test project to upload a zip file and then return results back to use immediatel
 ✔ - Fix posting to the wrong endpoint
 
 ✔ - Add file upload endpoint
+
+✔ - Get sending message back to all users working
+
+✔ - randomize value for file completion based on bunch of files by length
+
+✔ - send message back to ProcessingModal only, not chat thread
+
 ## In Progress
 
-* Add zip support
+
 
 
 ## To Do 
@@ -27,7 +34,9 @@ Test project to upload a zip file and then return results back to use immediatel
 
 * get token to send message back to just this user 
 
-* randomize value for file completion based on bunch of files by length
+* Add zip support
+
+* If files, render files in main thread
 
 
 
