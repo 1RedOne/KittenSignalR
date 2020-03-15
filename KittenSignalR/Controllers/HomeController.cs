@@ -48,7 +48,7 @@ namespace KittenSignalR.Controllers
 
         }
         [HttpGet]
-        public IActionResult Upload()
+        public IActionResult YoutubeDownload()
         {
             return View();
 
@@ -84,6 +84,34 @@ namespace KittenSignalR.Controllers
             // Don't rely on or trust the FileName property without validation.
 
             return Ok(new { count = files.Count, size });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> YoutubeDownload(string videolist)
+        {
+            string[] videos = videolist.Split(',');
+            string message;
+            int i = 0;
+            foreach (string video in videos)
+            {
+                i++;
+                message = $"processing file #{i} [{video}] of {videos.Count()}";
+                await _hubContext.Clients.All.SendAsync("ProgressUpdate", "Server", message);
+                Random rnd = new Random();
+                int number = rnd.Next(3, 11);
+
+                _timer = new Timer(DoWork, null, TimeSpan.Zero,
+                TimeSpan.FromSeconds(1));
+
+                //do something cool
+
+                await Task.Delay(500);
+            }
+            
+            // Process uploaded files
+            // Don't rely on or trust the FileName property without validation.
+
+            return Ok(new { count = videos.Count()});
         }
 
         private void DoWork(object state)

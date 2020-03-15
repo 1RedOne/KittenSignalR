@@ -26,7 +26,7 @@ namespace KittenSignalR
         {
             
             services.AddRouting();
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation(); ;
             services.AddSignalR();
         }
 

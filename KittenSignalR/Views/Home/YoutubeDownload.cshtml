@@ -1,0 +1,66 @@
+﻿@{
+    ViewData["Title"] = "Video Downloader";
+}
+
+
+<div class="modal fade in" tabindex="-1" role="dialog" id="ProcessingModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    Upload In progress
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="col-11">
+                    <small>
+                        <ul id="progressList"></ul>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<h1 class="display-4">YouTube Downloader</h1>
+<h4>Use this page to download youtube videos.</h4>
+<p>URLs (or playlists!) posted in the box below will be downloaded and will then appear in plex shortly!</p>
+
+<form action="YoutubeDownload"
+      enctype="multipart/form-data" onsubmit="AJAXSubmit(this);return false;"
+      method="post">
+    
+    
+    <textarea rows="4" cols="50" id="videolist" name="videolist">
+At w3schools.com you will learn how to make a website., maybe something cool, ok,1,2,3
+</textarea>
+    <br />
+    <input class="btn btn-primary" type="submit" value="Upload" />
+</form>
+
+
+<input class="btn btn-primary" type="submit" value="SendButton" id="sendButton" hidden/>
+
+
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/chat.js"></script>
+<script>
+    async function AJAXSubmit(oFormElement) {
+        var resultElement = oFormElement.elements.namedItem("result");
+        const formData = new FormData(oFormElement);
+
+        try {
+            $('#ProcessingModal').modal({ backdrop: 'static', keyboard: false });
+            const response = await fetch(oFormElement.action, {
+                method: 'POST',
+                body: formData,
+                location: "Upload"
+            });
+
+
+            resultElement.value = 'Result: ' + response.status + ' ' +
+                response.statusText;
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+</script>
