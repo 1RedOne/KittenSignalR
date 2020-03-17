@@ -1,16 +1,16 @@
-﻿using System;
+﻿using KittenSignalR.Hubs;
+using KittenSignalR.Models;
+using Medallion.Shell;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using KittenSignalR.Models;
-using Microsoft.AspNetCore.Http;
-using System.IO;
 using System.Threading;
-using KittenSignalR.Hubs;
-using Microsoft.AspNetCore.SignalR;
+using System.Threading.Tasks;
 
 namespace KittenSignalR.Controllers
 {
@@ -91,7 +91,7 @@ namespace KittenSignalR.Controllers
         {
             string[] videos = videolist.Split(',');
             string message;
-            int i = 0;
+            int i = 0;            
             foreach (string video in videos)
             {
                 i++;
@@ -104,7 +104,12 @@ namespace KittenSignalR.Controllers
                 TimeSpan.FromSeconds(1));
 
                 //do something cool
-
+                //var command = Command.Run("executable", "arg1", "arg2", ...);
+                var command = Command.Run("cmd.exe", "/c", video);                
+                
+                var result = await command.Task;
+                
+                await _hubContext.Clients.All.SendAsync("ProgressUpdate", "Server", $"[{result.Success}] - [{result.StandardOutput}]");
                 await Task.Delay(500);
             }
             
@@ -118,8 +123,8 @@ namespace KittenSignalR.Controllers
         {
             executionCount++;
 
-            _logger.LogInformation(
-                "Timed Hosted Service is working. Count: {Count}", executionCount);
+            //_logger.LogInformation(
+            //    "Timed Hosted Service is working. Count: {Count}", executionCount);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
