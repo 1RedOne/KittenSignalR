@@ -23,20 +23,23 @@ Test project to upload a zip file and then return results back to use immediatel
 
 ✔ - send message back to ProcessingModal only, not chat thread
 
+✔ - when parsing each file, send back 'Processing File X of Y', add a progress bar 
+
+✔ - Add YouTube endpoint
+
+✔ - Split a multiline string into a list of strings
+
 ## In Progress
 
-
+ * working on adding Docker Support
 
 
 ## To Do 
 
-* when parsing each file, send back 'Processing File X of Y', add a progress bar 
+* actually call youTubeDL
 
-* get token to send message back to just this user 
+* trigger plex update
 
-* Add zip support
-
-* If files, render files in main thread
 
 
 
