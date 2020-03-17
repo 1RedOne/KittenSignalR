@@ -28,8 +28,10 @@ namespace KittenSignalR
         {
             
             services.AddRouting();
-            services.AddControllersWithViews().AddRazorRuntimeCompilation(); ;
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddSignalR();
+            services.AddDirectoryBrowser();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,6 +63,13 @@ namespace KittenSignalR
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            //app.UseDirectoryBrowser(new DirectoryBrowserOptions
+            //{
+            //    FileProvider = new PhysicalFileProvider(
+            // Path.Combine("wwwroot")),
+            //    RequestPath = "/MyContent"
+            //});
         }
     }
 }
