@@ -105,8 +105,7 @@ namespace KittenSignalR.Controllers
 
                 //do something cool
                 //var command = Command.Run("executable", "arg1", "arg2", ...);
-                var command = Command.Run("cmd.exe", "/c", video);                
-                
+                var command = Command.Run("cmd.exe", "/c", "youtube-dl", "-o", "H:\\My Videos\\Remote\\%(title)s.%(ext)s", video);
                 var result = await command.Task;
                 
                 await _hubContext.Clients.All.SendAsync("ProgressUpdate", "Server", $"[{result.Success}] - [{result.StandardOutput}]");
