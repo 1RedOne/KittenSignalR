@@ -105,9 +105,10 @@ namespace KittenSignalR.Controllers
 
                 //do something cool
                 //var command = Command.Run("executable", "arg1", "arg2", ...);
-                string filePath = "c:\\youtubedls\\%(title)s.%(ext)s";
-                //string filePath = "/youtubeDLs/";
-                var command = Command.Run("cmd.exe", "/c", "youtube-dl", "-o", filePath + "%(title)s.%(ext)s", video);
+                //string filePath = "c:\\youtubedls\\%(title)s.%(ext)s";
+                string filePath = "/youtubeDLs/";
+                //var command = Command.Run("cmd.exe", "/c", "youtube-dl", "-o", filePath + "%(title)s.%(ext)s", video);
+                var command = Command.Run("cmd.exe", "/c", "youtube-dl", "-o", $"\"{filePath}\"" + "%(title)s.%(ext)s", video);
 
                 var result = await command.Task;
                 
