@@ -91,6 +91,7 @@ namespace KittenSignalR.Controllers
         {
             string[] videos = videolist.Split(',');
             string message;
+            Debug.WriteLine("new YouTubeDL Post received...");
             int i = 0;            
             foreach (string video in videos)
             {
@@ -102,38 +103,59 @@ namespace KittenSignalR.Controllers
 
                 _timer = new Timer(DoWork, null, TimeSpan.Zero,
                 TimeSpan.FromSeconds(1));
-
-                //do something cool
-                //var command = Command.Run("executable", "arg1", "arg2", ...);
-                //string filePath = "c:\\youtubedls\\%(title)s.%(ext)s";
                 string filePath = "/youtubeDLs/";
-                //var command = Command.Run("cmd.exe", "/c", "youtube-dl", "-o", filePath + "%(title)s.%(ext)s", video);
-                var command = Command.Run("cmd.exe", "/c", "youtube-dl", "-o", $"\"{filePath}\"" + "%(title)s.%(ext)s", video);
+                                
+                var command = Command.Run("bash", "-c", "/usr/local/bin/youtube-dl", "-o", $"\"{filePath}%(title)s.%(ext)s\"", video);                
 
-                var result = await command.Task;
-                
-                await _hubContext.Clients.All.SendAsync("ProgressUpdate", "Server", $"[{result.Success}] - [{result.StandardOutput}]");
+                var videoGetter = await VideoGetter(video);                
+                                
+                await _hubContext.Clients.All.SendAsync("ProgressUpdate", "Server", $"[{videoGetter}]");
                 await Task.Delay(500);
             }
-            
-            // Process uploaded files
-            // Don't rely on or trust the FileName property without validation.
+                        
 
             return Ok(new { count = videos.Count()});
         }
 
         private void DoWork(object state)
         {
-            executionCount++;
-
-            //_logger.LogInformation(
-            //    "Timed Hosted Service is working. Count: {Count}", executionCount);
+            executionCount++;            
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }        
+
+        private async Task<string> VideoGetter(string videoURL)
+        {
+            string cleanURL = videoURL.Replace("\r\n", string.Empty).Replace("\n", string.Empty);
+            string filePath = "/youtubeDLs/";
+            ProcessStartInfo procStartInfo = new ProcessStartInfo
+            {
+                FileName = "/bin/bash", // -c /usr/local/bin/youtube-dl"", video);
+                Arguments = $"-c \"/usr/local/bin/youtube-dl --no-progress {cleanURL}\"",
+                //Arguments = args,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                WorkingDirectory = filePath,
+                CreateNoWindow = true
+            };
+            //procStartInfo.ArgumentList.Add("-c");
+            //procStartInfo.ArgumentList.Add("/usr/local/bin/youtube-dl");
+            //procStartInfo.ArgumentList.Add("--version");
+            //procStartInfo.ArgumentList.Add("-o");
+            //procStartInfo.ArgumentList.Add($"\"{ filePath}%(title)s.%(ext)s\"");
+            //procStartInfo.ArgumentList.Add(videoURL);
+
+            Process proc = new Process();
+            proc.StartInfo = procStartInfo;
+            proc.Start();
+            proc.WaitForExit();
+            // Get the output into a string
+            return $"{proc.StandardOutput.ReadToEnd()} - {proc.StandardError.ReadToEnd()}";
         }
     }
 }
