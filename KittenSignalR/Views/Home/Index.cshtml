@@ -2,10 +2,15 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    <div class="jumbotron">
+        <h1 class="display-4">Home Tools</h1>
+        <p class="lead">A collection of tools and links of items that are available in the home.</p>
+        <hr class="my-4">
+        <p>If this page isn't loading, ask Stephen to launch Docker on eLope.</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+        </p>
+    </div>
 
 <div class="modal fade in" tabindex="-1" role="dialog" id="ProcessingModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -25,7 +30,7 @@
 </div>
 
 <div class="container">
-    <div class="row">
+    <div class="row" hidden>
         <div class="col-4">
             <h3>SignalR Chat</h3>
             <div class="row">
@@ -60,7 +65,7 @@
                                 <label for="FileUpload.FormFile">File</label>
                             </dt>
                             <dd>
-                                <input id="FileCount" type="text" placeholder="Enter file count" name="FileCount"/>
+                                <input id="FileCount" type="text" placeholder="Enter file count" name="FileCount" />
                                 <input id="FileUpload.FormFile" type="file"
                                        name="FileUpload.FormFile" />
                             </dd>
@@ -75,9 +80,41 @@
                 </div>
             </div>
         </div>
-            
+
+    </div>
+</div>
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-4">
+            <h3>Plex</h3>
+            <p>Wanna watch some shows?  
+            Cool.</p>
+            <a class="btn btn-info" hhref="http://localhost:32400/web/index.html">Launch Plex</a>
+</div>
+        <div class="col-4">
+            <h3>YouTube Downloader</h3>
+            <p>Need to download a show?  I gotcha covered</p>
+            <a class="btn btn-info" asp-area="" asp-controller="Home" asp-action="YouTubeDownload">🚀YouTube Download🚀</a>
+        </div>
+        <div class="col-4">
+            <h3>Downloads</h3>
+            <p>See what we already downloaded</p>
+            <a class="btn btn-info" asp-area="" asp-controller="Downloads" asp-action="Index">Downloads</a>
         </div>
     </div>
+</div>
+
+<h3>Other links</h3>
+<ul>
+    <li><a class="btn btn-primary btn-sm" href="http://192.168.0.5">Office WiFi</a></li>
+    <li><a class="btn btn-primary btn-sm" href="http://192.168.0.1">Living Room WiFi</a></li>
+    <li><a class="btn btn-primary btn-sm" href="http://192.168.0.17">Playground WiFi</a></li>
+    <li><a class="btn btn-primary btn-sm" href="http://192.168.0.200">Core Router</a></li>
+    <li><a class="btn btn-primary btn-sm" href="http://192.168.1.254">Fibre AP</a></li>
+</ul>
 
 <div class="row">
     <div class="col-12">
@@ -91,9 +128,6 @@
 </div>
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
 <script src="~/js/chat.js"></script>
-<div class="bg-img">
-    <img src="~/img/rocket.jpg" width="1200" height="600" />
-</div>
 
 
 <script>
@@ -124,7 +158,7 @@
                 body: formData,
                 location: "Upload"
             });
-            
+
 
             resultElement.value = 'Result: ' + response.status + ' ' +
                 response.statusText;
@@ -154,5 +188,4 @@
             background-image: linear-gradient(90deg, #0099FF 0%, #6610f2 100%);
             opacity: .6;
         }
-    
 </style>
