@@ -28,8 +28,8 @@
 <form action="YoutubeDownload"
       enctype="multipart/form-data" onsubmit="AJAXSubmit(this);return false;"
       method="post">
-    
-    
+
+
     <textarea rows="4" cols="50" id="videolist" name="videolist">
  https://www.youtube.com/watch?v=r5WLXZspD1M
 </textarea>
@@ -38,7 +38,7 @@
 </form>
 
 
-<input class="btn btn-primary" type="submit" value="SendButton" id="sendButton" hidden/>
+<input class="btn btn-primary" type="submit" value="SendButton" id="sendButton" hidden />
 
 
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
@@ -63,4 +63,13 @@
             console.error('Error:', error);
         }
     }
+</script>
+<h3>View Downloaded Videos</h3>
+
+<div id="dynamicContentContainer"></div>
+<script>
+    setTimeout(function () {
+        $("#dynamicContentContainer").load("/Downloads")
+    }, 5000);
+        
 </script>

@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <UserSecretsId>00d363f9e1a59b5579802d1813823cae</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+	<DockerfileRunArguments>-v "H:\My Videos\Remote:/youtubeDLs" -v "H:\My Videos\Remote:/app/youtubeDLs"</DockerfileRunArguments>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="\**" />

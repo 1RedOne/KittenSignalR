@@ -64,12 +64,12 @@ namespace KittenSignalR
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            //app.UseDirectoryBrowser(new DirectoryBrowserOptions
-            //{
-            //    FileProvider = new PhysicalFileProvider(
-            // Path.Combine("wwwroot")),
-            //    RequestPath = "/MyContent"
-            //});
+            app.UseDirectoryBrowser(new DirectoryBrowserOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+             Path.Combine(Directory.GetCurrentDirectory(), "youtubeDLs")),
+                RequestPath = "/Downloads"
+            });
         }
     }
 }
