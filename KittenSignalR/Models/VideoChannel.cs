@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace KittenSignalR.Models
@@ -16,9 +17,16 @@ namespace KittenSignalR.Models
 
     public class Creator
     {
+        [JsonPropertyName("channelId")]
         public string ChannelId { get; set; }
+
+        [JsonPropertyName("channelName")]
         public string ChannelName { get; set; }
+
+        [JsonPropertyName("channelUrl")]
         public string ChannelUrl { get; set; }
+
+        [JsonPropertyName("channelDescription")]
         public string ChannelDescription { get; set; }        
     }
 }

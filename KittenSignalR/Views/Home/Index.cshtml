@@ -2,15 +2,15 @@
     ViewData["Title"] = "Home Page";
 }
 
-    <div class="jumbotron">
-        <h1 class="display-4">Home Tools</h1>
-        <p class="lead">A collection of tools and links of items that are available in the home.</p>
-        <hr class="my-4">
-        <p>If this page isn't loading, ask Stephen to launch Docker on eLope.</p>
-        <p class="lead">
-            <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-        </p>
-    </div>
+<div class="jumbotron">
+    <h1 class="display-4">Home Tools</h1>
+    <p class="lead">A collection of tools and links of items that are available in the home.</p>
+    <hr class="my-4">
+    <p>If this page isn't loading, ask Stephen to launch Docker on eLope.</p>
+    <p class="lead">
+        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+    </p>
+</div>
 
 <div class="modal fade in" tabindex="-1" role="dialog" id="ProcessingModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -90,10 +90,12 @@
     <div class="row">
         <div class="col-4">
             <h3>Plex</h3>
-            <p>Wanna watch some shows?  
-            Cool.</p>
+            <p>
+                Wanna watch some shows?
+                Cool.
+            </p>
             <a class="btn btn-info" href="http://192.168.187.30:32400/web/index.html#!/">Launch Plex</a>
-</div>
+        </div>
         <div class="col-4">
             <h3>YouTube Downloader</h3>
             <p>Need to download a show?  I gotcha covered</p>
@@ -157,6 +159,31 @@
 
 
 <script>
+    
+        async function getAutocompleteResults(query) {
+    const resultsContainer = document.getElementById('autocompleteResults');
+        resultsContainer.innerHTML = ""; // Clear previous results
+
+        if (!query) return; // Do nothing if the query is empty
+
+        try {
+        // Fetch results from the API
+        const response = await fetch(`/api/home/autocomplete?query=${encodeURIComponent(query)}`);
+        const results = await response.json();
+
+        // Populate the results container
+        results.forEach(result => {
+            const li = document.createElement('li');
+        li.className = "list-group-item";
+        li.textContent = result.channelName;
+            li.onclick = () => window.open(result.channelUrl, '_blank'); // Open URL on click
+        resultsContainer.appendChild(li);
+        });
+    } catch (error) {
+            console.error("Error fetching autocomplete results:", error);
+    }
+}
+
     async function AJAXSubmit(oFormElement) {
         var resultElement = oFormElement.elements.namedItem("result");
         const formData = new FormData(oFormElement);
