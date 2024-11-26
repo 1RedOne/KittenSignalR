@@ -7,17 +7,19 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">
-                    Upload In progress
-                </h4>
+                <div class="d-flex align-items-center">
+                    <h4>Loading...</h4>
+                    <div id="spinner" class="spinner-grow ml-auto" role="status" ></div>
+                </div>                
             </div>
             <div class="modal-body">
-                <div class="col-11">
+                <div class="col-11">                    
                     <small>
                         <ul id="progressList"></ul>
                     </small>
                 </div>
             </div>
+            <button class="btn btn-info" id="reloadButton" style="visibility:hidden" onClick="window.location.reload();">Reload Page :)</button>
         </div>
     </div>
 </div>
@@ -47,7 +49,7 @@
     async function AJAXSubmit(oFormElement) {
         var resultElement = oFormElement.elements.namedItem("result");
         const formData = new FormData(oFormElement);
-
+        $('#spinner').css('visibility', 'visible');
         try {
             $('#ProcessingModal').modal({ backdrop: 'static', keyboard: false });
             const response = await fetch(oFormElement.action, {
@@ -55,10 +57,11 @@
                 body: formData,
                 location: "Upload"
             });
-
-
+            $('#reloadButton').css('visibility', 'visible');
+            $('#spinner').css('visibility', 'hidden');
             resultElement.value = 'Result: ' + response.status + ' ' +
                 response.statusText;
+
         } catch (error) {
             console.error('Error:', error);
         }
@@ -71,5 +74,5 @@
     setTimeout(function () {
         $("#dynamicContentContainer").load("/Downloads")
     }, 2800);
-        
+
 </script>

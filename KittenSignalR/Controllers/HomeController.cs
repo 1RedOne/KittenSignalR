@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -19,12 +20,18 @@ namespace KittenSignalR.Controllers
         private readonly ILogger<HomeController> _logger;
         private int executionCount = 0;
         private Timer _timer;
+        private List<Creator> creators;
         private readonly IHubContext<ChatHub> _hubContext;
 
         public HomeController(ILogger<HomeController> logger, IHubContext<ChatHub> hubContext)
         {
             _logger = logger;
             _hubContext = hubContext;
+             var jsonContent = System.IO.File.ReadAllText("creatorList.json");
+
+            // Deserialize the JSON into a List<Channel>
+            this.creators = JsonSerializer.Deserialize<List<Creator>>(jsonContent);
+
         }
 
         public IActionResult Index()
@@ -52,6 +59,23 @@ namespace KittenSignalR.Controllers
         {
             return View();
 
+        }
+
+        [Route("api/home/autocomplete")]
+        [HttpGet]
+        public IActionResult Autocomplete(string query)
+        {
+            if (string.IsNullOrEmpty(query))
+            {
+                return Ok(new List<Creator>()); // Return an empty list for empty queries
+            }
+
+            // Filter the list for autocomplete suggestions (case-insensitive)
+            var results = this.creators
+                .Where(c => c.ChannelName.Contains(query, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+
+            return Ok(results); // Return the filtered list as JSON
         }
 
         [HttpPost]

@@ -92,7 +92,7 @@
             <h3>Plex</h3>
             <p>Wanna watch some shows?  
             Cool.</p>
-            <a class="btn btn-info" hhref="http://localhost:32400/web/index.html">Launch Plex</a>
+            <a class="btn btn-info" href="http://192.168.187.30:32400/web/index.html#!/">Launch Plex</a>
 </div>
         <div class="col-4">
             <h3>YouTube Downloader</h3>
@@ -100,9 +100,19 @@
             <a class="btn btn-info" asp-area="" asp-controller="Home" asp-action="YouTubeDownload">🚀YouTube Download🚀</a>
         </div>
         <div class="col-4">
-            <h3>Downloads</h3>
+            <h3>YouTubeStore</h3>
             <p>See what we already downloaded</p>
-            <a class="btn btn-info" asp-area="" asp-controller="Downloads" asp-action="Index">Downloads</a>
+            <div class="container mt-4">
+                <div class="form-group">
+                    <label for="searchBox">Search for a Channel:</label>
+                    <input type="text"
+                           id="searchBox"
+                           class="form-control"
+                           placeholder="Type to search..."
+                           oninput="getAutocompleteResults(this.value)" />
+                </div>
+                <ul id="autocompleteResults" class="list-group mt-2"></ul>
+            </div>
         </div>
     </div>
 </div>
