@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using KittenSignalR.Hubs;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
+using KittenSignalR.Repositories;
 
 namespace KittenSignalR
 {
@@ -26,12 +27,13 @@ namespace KittenSignalR
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
             services.AddRouting();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddSignalR();
             services.AddDirectoryBrowser();
-
+            services.AddHttpClient<IYouTubeRepo, YouTubeRepo>();
+            services.AddSingleton<ICreatorSourceManager, CreatorSourceManager>();
+            services.ConfigureYoutubeOptions();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,7 +49,7 @@ namespace KittenSignalR
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            
+
             app.UseHttpsRedirection();
             app.UseDefaultFiles();
             app.UseStaticFiles();
@@ -64,10 +66,12 @@ namespace KittenSignalR
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
+            app.ConfigureDownloadDirectory();
+
             app.UseDirectoryBrowser(new DirectoryBrowserOptions
             {
                 FileProvider = new PhysicalFileProvider(
-             Path.Combine(Directory.GetCurrentDirectory(), "youtubeDLs")),
+                    Path.Combine(Directory.GetCurrentDirectory(), "youtubeDLs")),
                 RequestPath = "/Downloads"
             });
         }

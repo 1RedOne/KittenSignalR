@@ -27,6 +27,17 @@ namespace KittenSignalR.Models
         public string ChannelUrl { get; set; }
 
         [JsonPropertyName("channelDescription")]
-        public string ChannelDescription { get; set; }        
+        public string ChannelDescription { get; set; }
+
+        public Creator()
+        { }
+
+        public Creator(YouTubeChannelResult channelResult)
+        {
+            this.ChannelId = channelResult.CustomUrl;
+            this.ChannelName = channelResult.Title;
+            this.ChannelUrl = channelResult.CustomUrl;
+            this.ChannelDescription = channelResult.Description;
+        }
     }
 }
