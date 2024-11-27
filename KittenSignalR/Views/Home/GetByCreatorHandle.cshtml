@@ -1,0 +1,16 @@
+﻿@model Creator
+@{
+    ViewData["Title"] = $"View of {Model.ChannelName}";
+}
+
+<div class="container mt-4">
+    <h1>@Model.ChannelName</h1>
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="@Model.ThumbnailUri" alt="Thumbnail">
+        <div class="card-body">
+            <h5 class="card-title">@Model.ChannelName</h5>
+            <p class="card-text">@Model.ChannelDescription</p>
+            <a href="@Model.ChannelUrl" class="btn btn-primary" target="_blank">Visit Channel</a>
+        </div>
+    </div>
+</div>

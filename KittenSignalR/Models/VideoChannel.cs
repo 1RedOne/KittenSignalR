@@ -29,6 +29,9 @@ namespace KittenSignalR.Models
         [JsonPropertyName("channelDescription")]
         public string ChannelDescription { get; set; }
 
+        [JsonPropertyName("thumbnailUri")]
+        public string ThumbnailUri { get; set; }
+
         public Creator()
         { }
 
@@ -38,6 +41,7 @@ namespace KittenSignalR.Models
             this.ChannelName = channelResult.Title;
             this.ChannelUrl = channelResult.CustomUrl;
             this.ChannelDescription = channelResult.Description;
+            this.ThumbnailUri = channelResult.ThumbnailUrl;
         }
     }
 }

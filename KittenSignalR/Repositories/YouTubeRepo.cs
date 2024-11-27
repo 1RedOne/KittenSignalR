@@ -30,7 +30,6 @@ namespace KittenSignalR.Repositories
         public async Task<YouTubeChannelResult> InvokeYoutubeCreatorSearchAsync(string query)
         {
             {
-          
                 var requestUrl = $"https://youtube.googleapis.com/youtube/v3/channels?part=snippet,contentDetails,statistics&forHandle={query}&key={this.ApiKey}";
                 var request = new HttpRequestMessage(System.Net.Http.HttpMethod.Get, requestUrl);
 

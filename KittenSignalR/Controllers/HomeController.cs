@@ -60,6 +60,29 @@ namespace KittenSignalR.Controllers
             return View();
         }
 
+        [Route("/{creatorHandle}")]
+        [HttpGet]
+        public IActionResult GetByCreatorHandle(string creatorHandle)
+        {
+            //get creator by handle from list
+
+            var creatorList = _creatorSourceManager
+                .GetCreators();
+
+            //do a case insensitive search
+            var creator = creatorList
+                .FindAll(c => c.ChannelName.Equals(creatorHandle, StringComparison.OrdinalIgnoreCase))
+                .FirstOrDefault();
+            //.Where(c => StringComparison.CurrentCultureIgnoreCase.Equals(c.ChannelName, creatorHandle)).FirstOrDefault();
+
+            if (creator == null)
+            {
+                return NotFound();
+            }
+
+            return View(creator);
+        }
+
         [Route("api/home/autocomplete")]
         [HttpGet]
         public async Task<IActionResult> Autocomplete(string query)

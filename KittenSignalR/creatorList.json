@@ -3,108 +3,154 @@
     "channelId": "UC4a-Gbdw7vOaccHmFo40b9g",
     "channelName": "Khan Academy",
     "channelUrl": "https://www.youtube.com/user/khanacademy",
-    "channelDescription": "Khan Academy offers practice exercises, instructional videos, and a personalized learning dashboard that empower learners to study at their own pace in and outside of the classroom."
+    "channelDescription": "Khan Academy offers practice exercises, instructional videos, and a personalized learning dashboard that empower learners to study at their own pace in and outside of the classroom.",
+    "thumbnailUri": null
   },
   {
     "channelId": "UCsXVk37bltHxD1rDPwtNM8Q",
     "channelName": "Kurzgesagt \uFFFD In a Nutshell",
     "channelUrl": "https://www.youtube.com/user/Kurzgesagt",
-    "channelDescription": "Kurzgesagt creates animated educational content covering topics like science, technology, politics, and philosophy."
+    "channelDescription": "Kurzgesagt creates animated educational content covering topics like science, technology, politics, and philosophy.",
+    "thumbnailUri": null
   },
   {
     "channelId": "UC6nSFpj9HTCZ5t-N3Rm3-HA",
     "channelName": "Vsauce",
     "channelUrl": "https://www.youtube.com/user/Vsauce",
-    "channelDescription": "Vsauce features videos on scientific, psychological, mathematical, and philosophical topics, as well as gaming, technology, and popular culture."
+    "channelDescription": "Vsauce features videos on scientific, psychological, mathematical, and philosophical topics, as well as gaming, technology, and popular culture.",
+    "thumbnailUri": null
   },
   {
     "channelId": "UCHnyfMqiRRG1u-2MsSQLbXA",
     "channelName": "Veritasium",
     "channelUrl": "https://www.youtube.com/user/1veritasium",
-    "channelDescription": "Veritasium is a channel of science and engineering videos featuring experiments, expert interviews, cool demos, and discussions with the public about everything science-related."
+    "channelDescription": "Veritasium is a channel of science and engineering videos featuring experiments, expert interviews, cool demos, and discussions with the public about everything science-related.",
+    "thumbnailUri": null
   },
   {
     "channelId": "UC6107grRI4m0o2-emgoDnAA",
     "channelName": "SmarterEveryDay",
     "channelUrl": "https://www.youtube.com/user/destinws2",
-    "channelDescription": "SmarterEveryDay explores the world using science, featuring experiments and explanations to help viewers learn something new every day."
+    "channelDescription": "SmarterEveryDay explores the world using science, featuring experiments and explanations to help viewers learn something new every day.",
+    "thumbnailUri": null
   },
   {
     "channelId": "UCY1kMZp36IQSyNx_9h4mpCg",
     "channelName": "Mark Rober",
     "channelUrl": "https://www.youtube.com/user/onemeeeliondollars",
-    "channelDescription": "Former NASA engineer. Current CrunchLabs founder and friend of science."
+    "channelDescription": "Former NASA engineer. Current CrunchLabs founder and friend of science.",
+    "thumbnailUri": null
   },
   {
     "channelId": "UC0vBXGSyV14uvJ4hECDOl0Q",
     "channelName": "Mariah Elizabeth",
     "channelUrl": "https://www.youtube.com/user/mariahxxelizabeth",
-    "channelDescription": "Mariah Elizabeth is an arts and crafts channel focusing on DIY squishies, art, and creative projects."
+    "channelDescription": "Mariah Elizabeth is an arts and crafts channel focusing on DIY squishies, art, and creative projects.",
+    "thumbnailUri": null
   },
   {
     "channelId": "UCBJycsmduvYEL83R_U4JriQ",
     "channelName": "MKBHD",
     "channelUrl": "https://www.youtube.com/user/marquesbrownlee",
-    "channelDescription": "MKBHD is a technology-focused channel providing reviews, interviews, and discussions about the latest in tech."
+    "channelDescription": "MKBHD is a technology-focused channel providing reviews, interviews, and discussions about the latest in tech.",
+    "thumbnailUri": null
   },
   {
     "channelId": "UCX6b17PVsYBQ0ip5gyeme-Q",
     "channelName": "TED-Ed",
     "channelUrl": "https://www.youtube.com/user/TEDEducation",
-    "channelDescription": "TED-Ed is TED\u0027s youth and education initiative, offering animated educational videos across a wide range of subjects."
+    "channelDescription": "TED-Ed is TED\u0027s youth and education initiative, offering animated educational videos across a wide range of subjects.",
+    "thumbnailUri": null
   },
   {
     "channelId": "UCsT0YIqwnpJCM-mx7-gSA4Q",
     "channelName": "TED",
     "channelUrl": "https://www.youtube.com/user/TEDtalksDirector",
-    "channelDescription": "TED is a nonprofit devoted to spreading ideas, usually in the form of short, powerful talks (18 minutes or less)."
+    "channelDescription": "TED is a nonprofit devoted to spreading ideas, usually in the form of short, powerful talks (18 minutes or less).",
+    "thumbnailUri": null
   },
   {
     "channelId": "UC7_gcs09iThXybpVgjHZ_7g",
     "channelName": "CrashCourse",
     "channelUrl": "https://www.youtube.com/user/crashcourse",
-    "channelDescription": "CrashCourse offers high-quality educational videos on a variety of subjects, including history, science, economics, and more."
+    "channelDescription": "CrashCourse offers high-quality educational videos on a variety of subjects, including history, science, economics, and more.",
+    "thumbnailUri": null
   },
   {
     "channelId": "UCZYTClx2T1of7BRZ86-8fow",
     "channelName": "AsapSCIENCE",
     "channelUrl": "https://www.youtube.com/user/AsapSCIENCE",
-    "channelDescription": "AsapSCIENCE provides fun and informative videos that answer many of life\u0027s everyday questions with science."
+    "channelDescription": "AsapSCIENCE provides fun and informative videos that answer many of life\u0027s everyday questions with science.",
+    "thumbnailUri": null
   },
   {
     "channelId": "UCV4xOVpbcV8SdueDCOxLXtQ",
     "channelName": "MinutePhysics",
     "channelUrl": "https://www.youtube.com/user/minutephysics",
-    "channelDescription": "MinutePhysics offers cool physics and other sweet science videos, all in a minute."
+    "channelDescription": "MinutePhysics offers cool physics and other sweet science videos, all in a minute.",
+    "thumbnailUri": null
   },
   {
     "channelId": "UCoxcjq-8xIDTYp3uz647V5A",
     "channelName": "Numberphile",
     "channelUrl": "https://www.youtube.com/user/numberphile",
-    "channelDescription": "Numberphile features videos about numbers and mathematics, exploring topics from the profound to the quirky."
+    "channelDescription": "Numberphile features videos about numbers and mathematics, exploring topics from the profound to the quirky.",
+    "thumbnailUri": null
   },
   {
     "channelId": "UCsXVk37bltHxD1rDPwtNM8Q",
     "channelName": "Kurzgesagt \uFFFD In a Nutshell",
     "channelUrl": "https://www.youtube.com/user/Kurzgesagt",
-    "channelDescription": "Kurzgesagt creates animated educational content covering topics like science, technology, politics, and philosophy."
+    "channelDescription": "Kurzgesagt creates animated educational content covering topics like science, technology, politics, and philosophy.",
+    "thumbnailUri": null
   },
   {
     "channelId": "UC6nSFpj9HTCZ5t-N3Rm3-HA",
     "channelName": "Vsauce",
     "channelUrl": "https://www.youtube.com/user/Vsauce",
-    "channelDescription": "Vsauce features videos on scientific, psychological, mathematical, and philosophical topics, as well as gaming, technology, and popular culture."
+    "channelDescription": "Vsauce features videos on scientific, psychological, mathematical, and philosophical topics, as well as gaming, technology, and popular culture.",
+    "thumbnailUri": null
   },
   {
     "channelId": "UCHnyfMqiRRG1u-2MsSQLbXA",
     "channelName": "Veritasium",
     "channelUrl": "https://www.youtube.com/user/1veritasium",
-    "channelDescription": "Veritasium is a channel of science and engineering videos featuring experiments, expert interviews, cool demos, and discussions with the public about everything science-related."
+    "channelDescription": "Veritasium is a channel of science and engineering videos featuring experiments, expert interviews, cool demos, and discussions with the public about everything science-related.",
+    "thumbnailUri": null
   },
   {
     "channelId": "@nhrl",
     "channelName": "NHRL",
     "channelUrl": "@nhrl",
-    "channelDescription": "The most fun you can (legally) have with a robot.\n\nNHRL is the National Havoc Robot League. The biggest and most accessible robot combat league in the world.\n\nHome of the 3lb, 12lb and 30lb World Championships.\n"
+    "channelDescription": "The most fun you can (legally) have with a robot.\n\nNHRL is the National Havoc Robot League. The biggest and most accessible robot combat league in the world.\n\nHome of the 3lb, 12lb and 30lb World Championships.\n",
+    "thumbnailUri": null
+  },
+  {
+    "channelId": "@rof",
+    "channelName": "\u3084\u3059\u3060",
+    "channelUrl": "@rof",
+    "channelDescription": ":)\n\n",
+    "thumbnailUri": "https://yt3.ggpht.com/ytc/AIdro_l4ZL75-5Ub3E5IxgTKjuR5FlHIKkz6OPJ0fgdpe7QztA8=s88-c-k-c0x00ffffff-no-rj"
+  },
+  {
+    "channelId": "@roff",
+    "channelName": "roff",
+    "channelUrl": "@roff",
+    "channelDescription": "",
+    "thumbnailUri": "https://yt3.ggpht.com/ytc/AIdro_lotFs6ycgiZr-NN_4LfTzz9dFSTxJzf4gpa7KJax0=s88-c-k-c0x00ffffff-no-rj"
+  },
+  {
+    "channelId": "@roffl",
+    "channelName": "Roffl",
+    "channelUrl": "@roffl",
+    "channelDescription": "Ich spiele Minecraft (Manchmal zu viel)\n",
+    "thumbnailUri": "https://yt3.ggpht.com/VmY7GY6IelSY9L0QFvvnhLDTrP1j-e-sWCu-y_1z40CDI8xSQ-J3TB7zOtcTalyanHXHG2RkYQ=s88-c-k-c0x00ffffff-no-rj"
+  },
+  {
+    "channelId": "@roffle",
+    "channelName": "Roffle",
+    "channelUrl": "@roffle",
+    "channelDescription": "Subscribe for daily Wild Hearthstone videos!\n\n",
+    "thumbnailUri": "https://yt3.ggpht.com/ytc/AIdro_njfQPLbQMUzkw1RvhOAs5l7YiETmjEvRbPWmeAJf1Je48=s88-c-k-c0x00ffffff-no-rj"
   }
 ]
