@@ -3,14 +3,37 @@
     ViewData["Title"] = $"View of {Model.ChannelName}";
 }
 
-<div class="container mt-4">
+<div class="container mt-4" id="creatorThumbnailAndDetails">
     <h1>@Model.ChannelName</h1>
-    <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="@Model.ThumbnailUri" alt="Thumbnail">
+    <div class="card" style="width: 100%; max-width: 600px; margin: auto;">
+        <img class="card-img-top"
+             src="@Model.ThumbnailUri"
+             alt="Thumbnail"
+             style="width: 100%; height: auto; object-fit: cover;">
         <div class="card-body">
             <h5 class="card-title">@Model.ChannelName</h5>
             <p class="card-text">@Model.ChannelDescription</p>
             <a href="@Model.ChannelUrl" class="btn btn-primary" target="_blank">Visit Channel</a>
         </div>
     </div>
+    <!-- Placeholder for the partial view -->
+    <div id="videosContainer" class="mt-4">
+        <h3>Loading videos...</h3>
+    </div>
 </div>
+
+<script>
+    // Load the partial view dynamically
+    document.addEventListener("DOMContentLoaded", function () {
+        const handle = "@Model.ChannelId"; // Use the ChannelId as the handle
+        fetch(`/Home/GetVideosByCreatorHandle?handle=${encodeURIComponent(handle)}`)
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById("videosContainer").innerHTML = html;
+            })
+            .catch(error => {
+                console.error("Error loading videos:", error);
+                document.getElementById("videosContainer").innerHTML = "<p>Failed to load videos.</p>";
+            });
+    });
+</script>

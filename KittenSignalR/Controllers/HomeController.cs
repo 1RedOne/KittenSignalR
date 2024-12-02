@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Threading;
@@ -60,20 +61,23 @@ namespace KittenSignalR.Controllers
             return View();
         }
 
-        [Route("/{creatorHandle}")]
+        [Route("/creators")]
         [HttpGet]
-        public IActionResult GetByCreatorHandle(string creatorHandle)
+        public IActionResult GetCreators()
         {
             //get creator by handle from list
 
             var creatorList = _creatorSourceManager
                 .GetCreators();
 
-            //do a case insensitive search
-            var creator = creatorList
-                .FindAll(c => c.ChannelName.Equals(creatorHandle, StringComparison.OrdinalIgnoreCase))
-                .FirstOrDefault();
-            //.Where(c => StringComparison.CurrentCultureIgnoreCase.Equals(c.ChannelName, creatorHandle)).FirstOrDefault();
+            return View(creatorList);
+        }
+
+        [Route("/{creatorHandle}")]
+        [HttpGet]
+        public IActionResult GetByCreatorHandle(string creatorHandle)
+        {
+            var creator = this.GetByCreatorHandleOrId(creatorHandle);
 
             if (creator == null)
             {
@@ -83,11 +87,77 @@ namespace KittenSignalR.Controllers
             return View(creator);
         }
 
+        private Creator GetByCreatorHandleOrId(string creatorHandle)
+        {
+            var creatorList = _creatorSourceManager
+                .GetCreators();
+            //do a case insensitive search
+            var creator = creatorList
+                .FindAll(c => c.ChannelName.Equals(creatorHandle, StringComparison.OrdinalIgnoreCase))
+                .FirstOrDefault();
+
+            var creatorHandleResponse = creatorList
+                .FindAll(c => c.ChannelId.Equals(creatorHandle, StringComparison.OrdinalIgnoreCase))
+                .FirstOrDefault();
+
+            return creator ?? creatorHandleResponse;
+        }
+
+        public async Task<IActionResult> GetVideosByCreatorHandle(string handle)
+        {
+            var videos = new List<Video>();
+            for (int i = 0; i < 5; i++)
+            {
+                var vidThumb = await GetVideoThumbnailByHandleAndUri(handle, $"uri{i}");
+                videos.Add(new Video { CreatorId = handle, VideoThumbnail = vidThumb, VideoUrl = vidThumb, VideoTitle = $"Video {i} by {handle}", VideoDescription = "This is a video description", VideoLength = 60 });
+            }
+
+            return PartialView("_VideosByCreator", videos);
+        }
+
+        [HttpPut]
+        [Route("/{creatorHandle}/delete")]
+        public async Task<IActionResult> Delete(string creatorHandle)
+        {
+            var creator = this.GetByCreatorHandleOrId(creatorHandle);
+
+            if (creator == null)
+            {
+                return NotFound();
+            }
+
+            _creatorSourceManager.DeleteCreator(creator);
+
+            return new OkObjectResult($"deleted {creator.ChannelName}");
+        }
+
+        [HttpGet]
+        [Route("api/home/GetVideoThumbnailByHandleAndUri")]
+        public async Task<string> GetVideoThumbnailByHandleAndUri(string handle, string videoUri)
+        {
+            // Define the images folder and construct the file path
+            string imagesFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
+            string fileName = $"{handle}_{Uri.EscapeDataString(videoUri)}.png";
+            string filePath = Path.Combine(imagesFolder, fileName);
+
+            // Check if the file already exists
+            if (System.IO.File.Exists(filePath))
+            {
+                return $"/images/{fileName}"; // Return the relative path to the existing thumbnail
+            }
+
+            // Generate a new gradient image if the file doesn't exist
+            Directory.CreateDirectory(imagesFolder); // Ensure the folder exists
+            GenerateGradientImage(filePath);
+
+            return $"/images/{fileName}"; // Return the relative path to the new thumbnail
+        }
+
         [Route("api/home/autocomplete")]
         [HttpGet]
         public async Task<IActionResult> Autocomplete(string query)
         {
-            if (string.IsNullOrEmpty(query))
+            if (string.IsNullOrEmpty(query) || query.Length < 3)
             {
                 return Ok(new List<Creator>()); // Return an empty list for empty queries
             }
@@ -114,6 +184,10 @@ namespace KittenSignalR.Controllers
             //lookup on Youtube
             var ytResponse = await this._youtubeRepo.InvokeYoutubeCreatorSearchAsync(query);
 
+            if (null == ytResponse)
+            {
+                return new List<Creator>();
+            }
             //if results come back, cast to our Creator type, add to our JSON list so long as does not conflict
             var creator = new Creator(ytResponse);
 
@@ -178,6 +252,30 @@ namespace KittenSignalR.Controllers
             }
 
             return Ok(new { count = videos.Count() });
+        }
+
+        private void GenerateGradientImage(string filePath)
+        {
+            Random rand = new Random();
+
+            // Random colors for the gradient
+            var color1 = System.Drawing.Color.FromArgb(rand.Next(256), rand.Next(256), rand.Next(256));
+            var color2 = System.Drawing.Color.FromArgb(rand.Next(256), rand.Next(256), rand.Next(256));
+
+            int width = 300;  // Thumbnail width
+            int height = 200; // Thumbnail height
+
+            using (var bitmap = new System.Drawing.Bitmap(width, height))
+            using (var graphics = System.Drawing.Graphics.FromImage(bitmap))
+            using (var brush = new System.Drawing.Drawing2D.LinearGradientBrush(
+                new System.Drawing.Rectangle(0, 0, width, height),
+                color1,
+                color2,
+                45F)) // Gradient angle
+            {
+                graphics.FillRectangle(brush, 0, 0, width, height);
+                bitmap.Save(filePath, System.Drawing.Imaging.ImageFormat.Png);
+            }
         }
 
         private void DoWork(object state)

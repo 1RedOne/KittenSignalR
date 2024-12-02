@@ -1,0 +1,64 @@
+﻿@model List<Creator>
+
+@if (Model != null && Model.Any())
+{
+    <h3>Videos</h3>
+    <div>Found videos from @Model.Count() creators</div>
+    <ul class="list-group">
+        @* for each creator in Model, list out their info in a grid view *@
+        @foreach (var creator in Model)
+        {
+            <li class="list-group-item">
+                <div class="d-flex align-items-center">
+                    <!-- Thumbnail -->
+                    <img src="@creator.ThumbnailUri" alt="@creator.ChannelName Thumbnail" class="img-thumbnail" style="width: 100px; height: auto; margin-right: 10px;" />
+
+                    <!-- Creator Details -->
+                    <div>
+                        <h5>@creator.ChannelName</h5>
+                        <p class="mb-1">@creator.ChannelDescription</p>
+                        <a href="@creator.ChannelUrl" class="btn btn-sm btn-primary mt-2" target="_blank">Watch Video</a>
+                        <button class="btn btn-danger mt-2"
+                                onclick="deleteCreator('@creator.ChannelUrl')">
+                            Delete Creator
+                        </button>
+                    </div>
+                </div>
+                </li>
+        }
+                       
+    </ul>
+}
+else
+{
+    <p>No videos available for this creator.</p>
+}<script>
+     function deleteCreator(channelUrl) {
+         const deleteUrl = `${channelUrl}/delete`;
+
+         // Send the PUT request
+         fetch(deleteUrl, {
+             method: 'PUT',
+             headers: {
+                 'Content-Type': 'application/json',
+             },
+             // Optionally include a body if your API expects data
+             body: JSON.stringify({ reason: 'User initiated deletion' }),
+         })
+             .then(response => {
+                 if (response.ok) {
+                     alert('Creator deleted successfully!');
+                     // Optionally refresh the page or redirect
+                     window.location.reload();
+                 } else {
+                     alert('Failed to delete creator.');
+                 }
+             })
+             .catch(error => {
+                 console.error('Error:', error);
+                 alert('An error occurred while deleting the creator.');
+             });
+     }
+</script>
+
+

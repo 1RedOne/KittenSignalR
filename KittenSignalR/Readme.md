@@ -5,6 +5,8 @@
 [ ] Add Approval Flow
 [ ] Creator view model should be updated to have approval grid
 [ ] Creator View should cache these results
-[ ] Creator view should show video grid of new vids
+[ ] Creator view should actually load video info
+[x] Add all Creators view
+[x] Creator view should show video grid of new vids
 [x] Add creator View
 [x] Add YouTube Lookup

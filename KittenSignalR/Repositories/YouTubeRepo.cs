@@ -43,6 +43,11 @@ namespace KittenSignalR.Repositories
                 var content = await response.Content.ReadAsStringAsync();
                 var json = JsonConvert.DeserializeObject<YouTubeSearchResponse>(content);
 
+                if (null == json.items || json.items.Count == 0)
+                {
+                    return null;
+                }
+
                 //get .snippet property and cast to
                 var channelResult = new YouTubeChannelResult(json.items[0].snippet);
                 return channelResult;

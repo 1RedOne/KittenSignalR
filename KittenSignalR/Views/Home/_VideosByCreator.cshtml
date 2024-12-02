@@ -1,0 +1,31 @@
+﻿@model List<Video>
+
+@if (Model != null && Model.Any())
+{
+    <h3>Videos</h3>
+    <ul class="list-group">
+        @foreach (var video in Model)
+        {
+            
+            <li class="list-group-item">
+                <div class="d-flex align-items-center">
+                    <!-- Thumbnail -->
+                    <img src="@video.VideoThumbnail" alt="@video.VideoTitle Thumbnail" class="img-thumbnail" style="width: 100px; height: auto; margin-right: 10px;" />
+
+                    <!-- Video Details -->
+                    <div>
+                        <h5>@video.VideoTitle</h5>
+                        <p class="mb-1">@video.VideoDescription</p>
+                        <small>Length: @TimeSpan.FromSeconds(video.VideoLength).ToString(@"hh\:mm\:ss")</small><br />
+                        <a href="@video.VideoUrl" class="btn btn-sm btn-primary mt-2" target="_blank">Watch Video</a>
+                    </div>
+                </div>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>No videos available for this creator.</p>
+}
+

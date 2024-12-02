@@ -6,6 +6,9 @@ namespace KittenSignalR
     public interface ICreatorSourceManager
     {
         List<Creator> GetCreators();
+
         List<Creator> SetNewCreator(Creator creator);
+
+        void DeleteCreator(Creator creator);
     }
 }
