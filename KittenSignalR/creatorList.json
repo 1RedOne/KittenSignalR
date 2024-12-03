@@ -1,135 +1,154 @@
 [
   {
-    "channelId": "UCHnyfMqiRRG1u-2MsSQLbXA",
-    "channelName": "Veritasium",
-    "channelUrl": "https://www.youtube.com/user/1veritasium",
-    "channelDescription": "Veritasium is a channel of science and engineering videos featuring experiments, expert interviews, cool demos, and discussions with the public about everything science-related.",
-    "thumbnailUri": null
-  },
-  {
-    "channelId": "@nhrl",
-    "channelName": "NHRL",
-    "channelUrl": "@nhrl",
-    "channelDescription": "The most fun you can (legally) have with a robot.\n\nNHRL is the National Havoc Robot League. The biggest and most accessible robot combat league in the world.\n\nHome of the 3lb, 12lb and 30lb World Championships.\n",
-    "thumbnailUri": null
-  },
-  {
-    "channelId": "@rof",
-    "channelName": "\u3084\u3059\u3060",
-    "channelUrl": "@rof",
-    "channelDescription": ":)\n\n",
-    "thumbnailUri": "https://yt3.ggpht.com/ytc/AIdro_l4ZL75-5Ub3E5IxgTKjuR5FlHIKkz6OPJ0fgdpe7QztA8=s88-c-k-c0x00ffffff-no-rj"
-  },
-  {
-    "channelId": "@roffle",
-    "channelName": "Roffle",
-    "channelUrl": "@roffle",
-    "channelDescription": "Subscribe for daily Wild Hearthstone videos!\n\n",
-    "thumbnailUri": "https://yt3.ggpht.com/ytc/AIdro_njfQPLbQMUzkw1RvhOAs5l7YiETmjEvRbPWmeAJf1Je48=s88-c-k-c0x00ffffff-no-rj"
-  },
-  {
-    "channelId": "@rober",
-    "channelName": "rober",
-    "channelUrl": "@rober",
-    "channelDescription": "",
-    "thumbnailUri": "https://yt3.ggpht.com/ytc/AIdro_lvCeQK4US6gQweI2gwc0JdyBOmeshLgvNDzbGqCmuu5w=s88-c-k-c0x00ffffff-no-rj"
-  },
-  {
     "channelId": "@rob",
     "channelName": "Rob Polonsky",
     "channelUrl": "@rob",
     "channelDescription": "I create character-driven sketch comedy!\uD83E\uDD5B I\u0027m the guy who thinks the glass has just enough in it.\n",
-    "thumbnailUri": "https://yt3.ggpht.com/nqFgeQ4INv0OS_dbzzZqSZK_HYaCY5N52-TKorZtocalicPbnM57SKjkr2Ul4wbSFzIv4UVr=s88-c-k-c0x00ffffff-no-rj"
+    "thumbnailUri": "https://yt3.ggpht.com/nqFgeQ4INv0OS_dbzzZqSZK_HYaCY5N52-TKorZtocalicPbnM57SKjkr2Ul4wbSFzIv4UVr=s88-c-k-c0x00ffffff-no-rj",
+    "playlistUri": null
   },
   {
     "channelId": "@robe",
     "channelName": "RobE",
     "channelUrl": "@robe",
     "channelDescription": "",
-    "thumbnailUri": "https://yt3.ggpht.com/ytc/AIdro_ms1nLyCYVBLYba2egxytIDWYbX6xTZkX19tNUElw4=s88-c-k-c0x00ffffff-no-rj"
+    "thumbnailUri": "https://yt3.ggpht.com/ytc/AIdro_ms1nLyCYVBLYba2egxytIDWYbX6xTZkX19tNUElw4=s88-c-k-c0x00ffffff-no-rj",
+    "playlistUri": null
   },
   {
     "channelId": "@minutephysic",
     "channelName": "Minute Physics\n\n",
     "channelUrl": "@minutephysic",
     "channelDescription": "",
-    "thumbnailUri": "https://yt3.ggpht.com/xNGFNUJhh8R9wKyNqvk__lyc_qpMQ16LN4BNKuQYiLFd7dBrrptyBJhIZcXAxrBkMA7cYlrV=s88-c-k-c0x00ffffff-no-rj"
+    "thumbnailUri": "https://yt3.ggpht.com/xNGFNUJhh8R9wKyNqvk__lyc_qpMQ16LN4BNKuQYiLFd7dBrrptyBJhIZcXAxrBkMA7cYlrV=s88-c-k-c0x00ffffff-no-rj",
+    "playlistUri": null
   },
   {
     "channelId": "@mkbhd",
     "channelName": "Marques Brownlee",
     "channelUrl": "@mkbhd",
     "channelDescription": "MKBHD: Quality Tech Videos | YouTuber | Geek | Consumer Electronics | Tech Head | Internet Personality!\n\nbusiness@MKBHD.com\n\nNYC",
-    "thumbnailUri": "https://yt3.ggpht.com/lkH37D712tiyphnu0Id0D5MwwQ7IRuwgQLVD05iMXlDWO-kDHut3uI4MgIEAQ9StK0qOST7fiA=s88-c-k-c0x00ffffff-no-rj"
+    "thumbnailUri": "https://yt3.ggpht.com/lkH37D712tiyphnu0Id0D5MwwQ7IRuwgQLVD05iMXlDWO-kDHut3uI4MgIEAQ9StK0qOST7fiA=s88-c-k-c0x00ffffff-no-rj",
+    "playlistUri": null
   },
   {
     "channelId": "@mkbhd",
     "channelName": "Marques Brownlee",
     "channelUrl": "@mkbhd",
     "channelDescription": "MKBHD: Quality Tech Videos | YouTuber | Geek | Consumer Electronics | Tech Head | Internet Personality!\n\nbusiness@MKBHD.com\n\nNYC",
-    "thumbnailUri": "https://yt3.ggpht.com/lkH37D712tiyphnu0Id0D5MwwQ7IRuwgQLVD05iMXlDWO-kDHut3uI4MgIEAQ9StK0qOST7fiA=s88-c-k-c0x00ffffff-no-rj"
+    "thumbnailUri": "https://yt3.ggpht.com/lkH37D712tiyphnu0Id0D5MwwQ7IRuwgQLVD05iMXlDWO-kDHut3uI4MgIEAQ9StK0qOST7fiA=s88-c-k-c0x00ffffff-no-rj",
+    "playlistUri": null
   },
   {
     "channelId": "@mkb",
     "channelName": "How To Make",
     "channelUrl": "@mkb",
     "channelDescription": "How To Make things in a simple and easy way. \u002BSubscribe to see more.",
-    "thumbnailUri": "https://yt3.ggpht.com/ytc/AIdro_k6t_DaIXO18INiiGudyNDHK_G5hbGOU3a3hthaACsjUw=s88-c-k-c0x00ffffff-no-rj"
+    "thumbnailUri": "https://yt3.ggpht.com/ytc/AIdro_k6t_DaIXO18INiiGudyNDHK_G5hbGOU3a3hthaACsjUw=s88-c-k-c0x00ffffff-no-rj",
+    "playlistUri": null
   },
   {
     "channelId": "@mkbh",
     "channelName": "Harsh Shopping",
     "channelUrl": "@mkbh",
     "channelDescription": "",
-    "thumbnailUri": "https://yt3.ggpht.com/e_Xlt8EcWJ3k8_QrEt2Ei36te-TfVZdvsGO2ne7V6xExro6sOMhao51TOFfAUTB7i_v0FMjO7g=s88-c-k-c0x00ffffff-no-rj"
+    "thumbnailUri": "https://yt3.ggpht.com/e_Xlt8EcWJ3k8_QrEt2Ei36te-TfVZdvsGO2ne7V6xExro6sOMhao51TOFfAUTB7i_v0FMjO7g=s88-c-k-c0x00ffffff-no-rj",
+    "playlistUri": null
   },
   {
     "channelId": "@mariahelizabeth",
     "channelName": "Mariah Elizabeth",
     "channelUrl": "@mariahelizabeth",
     "channelDescription": "\uD83E\uDDA6",
-    "thumbnailUri": "https://yt3.ggpht.com/fzt9072EJn_XTKoMv7CmzvqApXJima51dfMMrW-6M3XGFRMEo7F5l8iBkbQk8NirQzAmOi3ZjRw=s88-c-k-c0x00ffffff-no-rj"
+    "thumbnailUri": "https://yt3.ggpht.com/fzt9072EJn_XTKoMv7CmzvqApXJima51dfMMrW-6M3XGFRMEo7F5l8iBkbQk8NirQzAmOi3ZjRw=s88-c-k-c0x00ffffff-no-rj",
+    "playlistUri": null
   },
   {
     "channelId": "@moriah",
     "channelName": "Moriah",
     "channelUrl": "@moriah",
     "channelDescription": "",
-    "thumbnailUri": "https://yt3.ggpht.com/ytc/AIdro_mTGujSbUbP6gj4sIf1uqoIuTNUgOf6knTKQ9MO9C3fJA=s88-c-k-c0x00ffffff-no-rj"
+    "thumbnailUri": "https://yt3.ggpht.com/ytc/AIdro_mTGujSbUbP6gj4sIf1uqoIuTNUgOf6knTKQ9MO9C3fJA=s88-c-k-c0x00ffffff-no-rj",
+    "playlistUri": null
   },
   {
     "channelId": "@moriaheliza",
     "channelName": "Moriah Eliza",
     "channelUrl": "@moriaheliza",
     "channelDescription": "",
-    "thumbnailUri": "https://yt3.ggpht.com/ytc/AIdro_kAvXwKhF9W-758960a9XjLrXxvSdrZkX4XZl0vZ0CotMcCwuJe0HKveyMX8NMWQ9UFfw=s88-c-k-c0x00ffffff-no-rj"
+    "thumbnailUri": "https://yt3.ggpht.com/ytc/AIdro_kAvXwKhF9W-758960a9XjLrXxvSdrZkX4XZl0vZ0CotMcCwuJe0HKveyMX8NMWQ9UFfw=s88-c-k-c0x00ffffff-no-rj",
+    "playlistUri": null
   },
   {
     "channelId": "@moriahelizabet",
     "channelName": "Arty gamer ",
     "channelUrl": "@moriahelizabet",
     "channelDescription": "Hi welcome to my channel\n\nMy channel is about art, unboxings, roblox and every thing dinosaur retaliated \nI am a new creator on YouTube so if you could help me out and click that subscribe button that would be awesome.",
-    "thumbnailUri": "https://yt3.ggpht.com/9gEpBZREgzzq5GdG2odQ2HpWqTNNX9Mo9-IS5zuyoQ2U3GvXWS20fAhpfpgUU1byeZzxf3zfSJw=s88-c-k-c0x00ffffff-no-rj"
-  },
-  {
-    "channelId": "@moriahelizabeth",
-    "channelName": "Moriah Elizabeth",
-    "channelUrl": "@moriahelizabeth",
-    "channelDescription": "Hey it\u0027s ME (Moriah Elizabeth).\n\nFAQ\u0027S\nWhat editing program do you use? Adobe Premiere Pro CC\nWhat camera do you film with? Canon EOS R5\nWhat ethnicity are you? My mom is white, my dad is Peruvian\nHow old are you? 30\n\nFor business or promotional inquiries please contact connect@moriah.video\n\n\n____MAIL ME____\n\nFor sending squishies, Letters, or general fan mail, please contact: FANMAIL@MORIAH.VIDEO to request my P.O. box address :)\n\u2022FOR SERIOUS INQUIRIES ONLY PLEASE! Unfortunately I can only respond to a small amount of people each week. This is to make sure that I get a reasonable amount of mail and can feature the maximum amount on camera. I apologize in advance if you do not hear back from me. This email get SUPER clogged with thousands of messages. SORRY PEEPS!*",
-    "thumbnailUri": "https://yt3.ggpht.com/06SZXUL0QLbL1jocuchPISrEsjo7sgS1jjR96Sgq-c01PVWW3fX9TQAC-kCBMfVbtI9UwGJWgg=s88-c-k-c0x00ffffff-no-rj"
+    "thumbnailUri": "https://yt3.ggpht.com/9gEpBZREgzzq5GdG2odQ2HpWqTNNX9Mo9-IS5zuyoQ2U3GvXWS20fAhpfpgUU1byeZzxf3zfSJw=s88-c-k-c0x00ffffff-no-rj",
+    "playlistUri": null
   },
   {
     "channelId": "@kurzgesagt",
     "channelName": "Kurzgesagt \u2013 In a Nutshell",
     "channelUrl": "@kurzgesagt",
     "channelDescription": "Animation videos explaining things with optimistic nihilism since 12,013.\n\nWe\u2019re a team of illustrators, animators, number crunchers and one dog who aim to spark curiosity about science and the world we live in. To us nothing is boring if you tell a good story.\n\nFor updates on our videos and other news from the kurzgesagt universe follow us on Twitter, Facebook, Instagram and LinkedIn.\n",
-    "thumbnailUri": "https://yt3.ggpht.com/ytc/AIdro_n1Ribd7LwdP_qKtqWL3ZDfIgv9M1d6g78VwpHGXVR2Ir4=s88-c-k-c0x00ffffff-no-rj"
+    "thumbnailUri": "https://yt3.ggpht.com/ytc/AIdro_n1Ribd7LwdP_qKtqWL3ZDfIgv9M1d6g78VwpHGXVR2Ir4=s88-c-k-c0x00ffffff-no-rj",
+    "playlistUri": null
   },
   {
     "channelId": "@smartereveryday",
     "channelName": "SmarterEveryDay",
     "channelUrl": "@smartereveryday",
     "channelDescription": "I explore the world using science.  That\u0027s pretty much all there is to it.  Watch 2 videos. If you learn something AWESOME, please subscribe if you feel like I earned it.\n\nContact: http://www.smartereveryday.com/contact.  I currently get lots of correspondence so please forgive me if I\u0027m unable to reply.  I mean well, but want to focus on being a better Dad.",
-    "thumbnailUri": "https://yt3.ggpht.com/ytc/AIdro_l59Ewmp0DHZBRWbY9dVqjd2_mWwvrn8ad0bJfmdbMRYcA=s88-c-k-c0x00ffffff-no-rj"
+    "thumbnailUri": "https://yt3.ggpht.com/ytc/AIdro_l59Ewmp0DHZBRWbY9dVqjd2_mWwvrn8ad0bJfmdbMRYcA=s88-c-k-c0x00ffffff-no-rj",
+    "playlistUri": null
+  },
+  {
+    "channelId": "@roffle",
+    "channelName": "Roffle",
+    "channelUrl": "@roffle",
+    "channelDescription": "Subscribe for daily Wild Hearthstone videos!\n\n",
+    "thumbnailUri": "https://yt3.ggpht.com/ytc/AIdro_njfQPLbQMUzkw1RvhOAs5l7YiETmjEvRbPWmeAJf1Je48=s88-c-k-c0x00ffffff-no-rj",
+    "playlistUri": null
+  },
+  {
+    "channelId": "@rof",
+    "channelName": "\u3084\u3059\u3060",
+    "channelUrl": "@rof",
+    "channelDescription": ":)\n\n",
+    "thumbnailUri": "https://yt3.ggpht.com/ytc/AIdro_l4ZL75-5Ub3E5IxgTKjuR5FlHIKkz6OPJ0fgdpe7QztA8=s88-c-k-c0x00ffffff-no-rj",
+    "playlistUri": "UU_H6ld812-oMQLr0u9HKnCA"
+  },
+  {
+    "channelId": "@veritasium",
+    "channelName": "Veritasium",
+    "channelUrl": "@veritasium",
+    "channelDescription": "An element of truth - videos about science, education, and anything else I find interesting.",
+    "thumbnailUri": "https://yt3.ggpht.com/ytc/AIdro_nSatGjGLZG1_O1ztYxuKvRazCbk9A0kPhtt2NxEH4ZKfA=s88-c-k-c0x00ffffff-no-rj",
+    "playlistUri": "UUHnyfMqiRRG1u-2MsSQLbXA"
+  },
+  {
+    "channelId": "@veritasium",
+    "channelName": "Veritasium",
+    "channelUrl": "@veritasium",
+    "channelDescription": "An element of truth - videos about science, education, and anything else I find interesting.",
+    "thumbnailUri": "https://yt3.ggpht.com/ytc/AIdro_nSatGjGLZG1_O1ztYxuKvRazCbk9A0kPhtt2NxEH4ZKfA=s88-c-k-c0x00ffffff-no-rj",
+    "playlistUri": "UUHnyfMqiRRG1u-2MsSQLbXA"
+  },
+  {
+    "channelId": "@moriahelizabeth",
+    "channelName": "Moriah Elizabeth",
+    "channelUrl": "@moriahelizabeth",
+    "channelDescription": "Hey it\u0027s ME (Moriah Elizabeth).\n\nFAQ\u0027S\nWhat editing program do you use? Adobe Premiere Pro CC\nWhat camera do you film with? Canon EOS R5\nWhat ethnicity are you? My mom is white, my dad is Peruvian\nHow old are you? 30\n\nFor business or promotional inquiries please contact connect@moriah.video\n\n\n____MAIL ME____\n\nFor sending squishies, Letters, or general fan mail, please contact: FANMAIL@MORIAH.VIDEO to request my P.O. box address :)\n\u2022FOR SERIOUS INQUIRIES ONLY PLEASE! Unfortunately I can only respond to a small amount of people each week. This is to make sure that I get a reasonable amount of mail and can feature the maximum amount on camera. I apologize in advance if you do not hear back from me. This email get SUPER clogged with thousands of messages. SORRY PEEPS!*",
+    "thumbnailUri": "https://yt3.ggpht.com/06SZXUL0QLbL1jocuchPISrEsjo7sgS1jjR96Sgq-c01PVWW3fX9TQAC-kCBMfVbtI9UwGJWgg=s88-c-k-c0x00ffffff-no-rj",
+    "playlistUri": "UUYAB7hh1ohA8-iX54EpMdeA"
+  },
+  {
+    "channelId": "@nhrl",
+    "channelName": "NHRL",
+    "channelUrl": "@nhrl",
+    "channelDescription": "The most fun you can (legally) have with a robot.\n\nNHRL is the National Havoc Robot League. The biggest and most accessible robot combat league in the world.\n\nHome of the 3lb, 12lb and 30lb World Championships.\n",
+    "thumbnailUri": "https://yt3.ggpht.com/ULRL4L_6IAnnE5-dBVYo10RePw2tAGM2djdug1tt0Q25NE8DTuajAcoZf1meiPKzCfKmk8eeajw=s88-c-k-c0x00ffffff-no-rj",
+    "playlistUri": "UUhgAZxOWR0S3Q376oAodGjQ"
   }
 ]

@@ -19,6 +19,9 @@ namespace KittenSignalR.Models
         [JsonPropertyName("thumbnailUri")]
         public string ThumbnailUri { get; set; }
 
+        [JsonPropertyName("playlistUri")]
+        public string PlaylistUri { get; set; }
+
         public Creator()
         { }
 
@@ -29,6 +32,7 @@ namespace KittenSignalR.Models
             ChannelUrl = channelResult.CustomUrl;
             ChannelDescription = channelResult.Description;
             ThumbnailUri = channelResult.ThumbnailUrl;
+            PlaylistUri = channelResult.linkedPlaylists.uploads;
         }
     }
 }

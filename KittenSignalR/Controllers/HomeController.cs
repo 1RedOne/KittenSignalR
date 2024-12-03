@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.UserDataTasks.DataProvider;
 
 namespace KittenSignalR.Controllers
 {
@@ -23,15 +24,17 @@ namespace KittenSignalR.Controllers
         private Timer _timer;
         private readonly IYouTubeRepo _youtubeRepo;
         private readonly ICreatorSourceManager _creatorSourceManager;
+        private readonly IVideoSourceManager _videoSourceManager;
         private List<Creator> creators;
         private readonly IHubContext<ChatHub> _hubContext;
 
-        public HomeController(ILogger<HomeController> logger, IHubContext<ChatHub> hubContext, IYouTubeRepo youTubeRepo, ICreatorSourceManager creatorSourceManager)
+        public HomeController(ILogger<HomeController> logger, IHubContext<ChatHub> hubContext, IYouTubeRepo youTubeRepo, ICreatorSourceManager creatorSourceManager, IVideoSourceManager videoSourceManager)
         {
             _logger = logger;
             _hubContext = hubContext;
             _youtubeRepo = youTubeRepo;
             _creatorSourceManager = creatorSourceManager;
+            _videoSourceManager = videoSourceManager;
         }
 
         public IActionResult Index()
@@ -73,6 +76,18 @@ namespace KittenSignalR.Controllers
             return View(creatorList);
         }
 
+        [Route("/videos")]
+        [HttpGet]
+        public IActionResult GetVideos()
+        {
+            //get creator by handle from list
+
+            var videoList = _videoSourceManager
+                .GetVideos();
+
+            return View(videoList);
+        }
+
         [Route("/{creatorHandle}")]
         [HttpGet]
         public IActionResult GetByCreatorHandle(string creatorHandle)
@@ -106,10 +121,20 @@ namespace KittenSignalR.Controllers
         public async Task<IActionResult> GetVideosByCreatorHandle(string handle)
         {
             var videos = new List<Video>();
+            var creator = this.GetByCreatorHandleOrId(handle);
+
+            await this.EnsureThatCreatorPlaylistUriIsNotNull(creator);
+
+            var videoList = await _videoSourceManager.GetVideosFromCreator(creator, 5);
+            if (videoList != null)
+            {
+                return PartialView("_VideosByCreator", videoList);
+            }
+
             for (int i = 0; i < 5; i++)
             {
                 var vidThumb = await GetVideoThumbnailByHandleAndUri(handle, $"uri{i}");
-                videos.Add(new Video { CreatorId = handle, VideoThumbnail = vidThumb, VideoUrl = vidThumb, VideoTitle = $"Video {i} by {handle}", VideoDescription = "This is a video description", VideoLength = 60 });
+                videos.Add(new Video(null, creator) { CreatorId = handle, VideoThumbnail = vidThumb, VideoUrl = vidThumb, VideoTitle = $"Video {i} by {handle}", VideoDescription = "This is a video description", VideoLength = 60 });
             }
 
             return PartialView("_VideosByCreator", videos);
@@ -129,6 +154,21 @@ namespace KittenSignalR.Controllers
             _creatorSourceManager.DeleteCreator(creator);
 
             return new OkObjectResult($"deleted {creator.ChannelName}");
+        }
+
+        [HttpPut]
+        [Route("/{creatorHandle}/refresh")]
+        public async Task<IActionResult> Refresh(string creatorHandle)
+        {
+            var creators = await this.YoutubeLookup(creatorHandle, forceRefresh: true);
+            var creator = creators.FirstOrDefault();
+
+            if (creator == null)
+            {
+                return NotFound();
+            }
+
+            return new OkObjectResult($"Refreshed details for {creator.ChannelName}");
         }
 
         [HttpGet]
@@ -179,7 +219,7 @@ namespace KittenSignalR.Controllers
             return Ok(results); // Return the filtered list as JSON
         }
 
-        private async Task<List<Creator>> YoutubeLookup(string query)
+        private async Task<List<Creator>> YoutubeLookup(string query, bool forceRefresh = false)
         {
             //lookup on Youtube
             var ytResponse = await this._youtubeRepo.InvokeYoutubeCreatorSearchAsync(query);
@@ -188,11 +228,20 @@ namespace KittenSignalR.Controllers
             {
                 return new List<Creator>();
             }
+
             //if results come back, cast to our Creator type, add to our JSON list so long as does not conflict
             var creator = new Creator(ytResponse);
 
             //this.creators.Add(creator);
-            var creatorList = _creatorSourceManager.SetNewCreator(creator);
+            if (forceRefresh)
+            {
+                _creatorSourceManager.RefreshCreator(creator);
+            }
+            else
+            {
+                _ = _creatorSourceManager.SetNewCreator(creator);
+            }
+
             var retrnList = new List<Creator>() { creator };
             return retrnList;
         }
@@ -317,6 +366,30 @@ namespace KittenSignalR.Controllers
             proc.WaitForExit();
             // Get the output into a string
             return $"{proc.StandardOutput.ReadToEnd()} - {proc.StandardError.ReadToEnd()}";
+        }
+
+        private async Task EnsureThatCreatorPlaylistUriIsNotNull(Creator creator)
+        {
+            //if creator.playlistUri is null we need to refresh the creator object to populate this
+            if (null == creator.PlaylistUri)
+            {
+                var response = await this.YoutubeLookup(creator.ChannelId, forceRefresh: true);
+
+                if (response == null)
+                {
+                    throw new Exception("Failed to retrieve info");
+                }
+
+                creator = response.FirstOrDefault();
+
+                Console.WriteLine($"Refresh completed for {creator.ChannelName} and playlist {creator.PlaylistUri}");
+            }
+            else
+            {
+                Console.WriteLine($"No need to refresh URI, for {creator.ChannelName} and playlist {creator.PlaylistUri}");
+            }
+
+            return;
         }
     }
 }

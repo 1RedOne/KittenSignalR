@@ -68,5 +68,29 @@ namespace KittenSignalR.Repositories
 
             creatorList = GetCreators();
         }
+
+        public void RefreshCreator(Creator creator)
+        {
+            Console.WriteLine("Refreshing creator");
+
+            //remove creator from list and then save it
+            var toRemove = creatorList.Where(x => x.ChannelName == creator.ChannelName).FirstOrDefault();
+
+            if (toRemove != null)
+            {
+                creatorList.Remove(toRemove);
+            }
+
+            //take in new creator item and convert it to json, add to list and then save it
+            creatorList.Add(creator);
+
+            //we need to use this property when serializing WriteIndented = true
+            var serializerOptions = new JsonSerializerOptions { WriteIndented = true };
+            var jsonContent = JsonSerializer.Serialize(creatorList, serializerOptions);
+
+            System.IO.File.WriteAllText("creatorList.json", jsonContent);
+
+            creatorList = GetCreators();
+        }
     }
 }

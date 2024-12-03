@@ -10,5 +10,7 @@ namespace KittenSignalR
         List<Creator> SetNewCreator(Creator creator);
 
         void DeleteCreator(Creator creator);
+
+        void RefreshCreator(Creator creator);
     }
 }

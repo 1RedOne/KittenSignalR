@@ -3,28 +3,12 @@ using System;
 
 namespace KittenSignalR.Models
 {
-    public class YouTubeChannelResult
-    {
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public string CustomUrl { get; set; }
-        public DateTime PublishedAt { get; set; }
-        public string ThumbnailUrl { get; set; }
-
-        public YouTubeChannelResult(Snippet snippet)
-        {
-            this.PublishedAt = snippet.publishedAt;
-            this.Title = snippet.title;
-            this.Description = snippet.description;
-            this.CustomUrl = snippet.customUrl;
-            this.ThumbnailUrl = snippet.thumbnails.@default.url;
-        }
-    }
-
     // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
     public class ContentDetails
     {
         public RelatedPlaylists relatedPlaylists { get; set; }
+        public DateTime videoPublishedAt { get; set; }
+        public string videoId { get; set; }
     }
 
     public class Default

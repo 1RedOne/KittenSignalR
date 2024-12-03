@@ -33,6 +33,7 @@ namespace KittenSignalR
             services.AddDirectoryBrowser();
             services.AddHttpClient<IYouTubeRepo, YouTubeRepo>();
             services.AddSingleton<ICreatorSourceManager, CreatorSourceManager>();
+            services.AddSingleton<IVideoSourceManager, VideoSourceManager>();
             services.ConfigureYoutubeOptions();
         }
 
