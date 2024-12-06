@@ -8,12 +8,14 @@ namespace KittenSignalR
     {
         List<Video> GetVideos();
 
-        Task<List<Video>> GetVideosFromCreator(Creator creator, int maxVideos);
+        Task<List<Video>> GetVideosFromCreator(Creator creator, int maxVideos, int AdditionalRequestedVideoCount);
 
         List<Video> SetNewVideoFromCreator(Video video, Creator creator);
 
         void DeleteVideo(Video video);
 
         void DeleteVideo(Video video, Creator creator);
+
+        Video GetVideo(string videoId);
     }
 }

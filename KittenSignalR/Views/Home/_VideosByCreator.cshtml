@@ -3,6 +3,7 @@
 @if (Model != null && Model.Any())
 {
     <h3>Videos</h3>
+    <p>Found @Model.Count() videos</p>
     <ul class="list-group">
         @foreach (var video in Model)
         {
@@ -15,8 +16,14 @@
                     <!-- Video Details -->
                     <div>
                         <h5>@video.VideoTitle</h5>
-                        <p class="mb-1">@video.VideoDescription</p>
-                        <small>Length: @TimeSpan.FromSeconds(video.VideoLength).ToString(@"hh\:mm\:ss")</small><br />
+                        <p class="mb-1">
+                            @(
+                                @video.VideoDescription.Length > 300
+                                ? @video.VideoDescription.Substring(0, 300) + "..."
+                                : @video.VideoDescription
+                                )
+                        </p>
+                        <small>Length: @TimeSpan.FromSeconds(video.VideoLength).ToString(@"hh\:mm\:ss")</small><p>Published @video.GetDateAgo()</p><br />
                         <a href="@video.VideoUrl" class="btn btn-sm btn-primary mt-2" target="_blank">Watch Video</a>
                     </div>
                 </div>

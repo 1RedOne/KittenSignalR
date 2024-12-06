@@ -97,7 +97,7 @@ namespace KittenSignalR.Repositories
                 //todo add code to retrieve here
             }
 
-            var requestUrl = $"https://youtube.googleapis.com/youtube/v3/playlistItems?part=contentDetails%2Csnippet&maxResults=5&playlistId={creator.PlaylistUri}&key={this.ApiKey}";
+            var requestUrl = $"https://youtube.googleapis.com/youtube/v3/playlistItems?part=contentDetails%2Csnippet&maxResults={maxCount}&playlistId={creator.PlaylistUri}&key={this.ApiKey}";
             //var requestUrl = $"https://youtube.googleapis.com/youtube/v3/search?key={this.ApiKey}&forHandle={creator}&part=snippet,id&order=date&maxResults={maxCount}";
             var request = new HttpRequestMessage(System.Net.Http.HttpMethod.Get, requestUrl);
 

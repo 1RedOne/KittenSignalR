@@ -10,10 +10,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.UserDataTasks.DataProvider;
+using static KittenSignalR.Models.Video;
 
 namespace KittenSignalR.Controllers
 {
@@ -85,7 +87,66 @@ namespace KittenSignalR.Controllers
             var videoList = _videoSourceManager
                 .GetVideos();
 
+            videoList.ForEach(x => x.TrimExcessiveDescriptions());
+
             return View(videoList);
+        }
+
+        [Route("/videos/api")]
+        [HttpGet]
+        public IActionResult GetVideosApi()
+        {
+            //get creator by handle from list
+
+            var videoList = _videoSourceManager
+                .GetVideos();
+
+            videoList.ForEach(x => x.TrimExcessiveDescriptions());
+
+            return Ok(videoList);
+        }
+
+        [Route("/videos2/api")]
+        [HttpGet]
+        public IActionResult GetVideos2Api()
+        {
+            var videoList = _videoSourceManager
+                .GetVideos();
+
+            videoList.ForEach(x => x.TrimExcessiveDescriptions());
+            videoList.ForEach(x => x.SetupCreatorChannelName());
+
+            var groupedVideos = videoList
+                .GroupBy(v => v.CreatorChannelName)
+                .Select(group => new CreatorVideos
+                {
+                    CreatorName = group.Key,
+                    Videos = group.ToList()
+                })
+            .ToList();
+
+            return Ok(groupedVideos);
+        }
+
+        [Route("/videos2")]
+        [HttpGet]
+        public IActionResult GetVideos2()
+        {
+            var videoList = _videoSourceManager
+                .GetVideos();
+
+            videoList.ForEach(x => x.TrimExcessiveDescriptions());
+            videoList.ForEach(x => x.SetupCreatorChannelName());
+            var groupedVideos = videoList
+                .GroupBy(v => v.CreatorChannelName)
+                .Select(group => new CreatorVideos
+                {
+                    CreatorName = group.Key,
+                    Videos = group.ToList()
+                })
+            .ToList();
+
+            return View(groupedVideos);
         }
 
         [Route("/{creatorHandle}")]
@@ -96,9 +157,20 @@ namespace KittenSignalR.Controllers
 
             if (creator == null)
             {
-                return NotFound();
+                this._logger?.LogInformation($"Did not find a creator called {creatorHandle}, checking for videos instead");
+                var videoId = creatorHandle;
+                var video = this._videoSourceManager.GetVideo(videoId);
+
+                if (video == null)
+                {
+                    return NotFound();
+                }
+                
+                this._logger?.LogInformation($"Found a Video ID of {videoId}, {video.VideoTitle}");
+                return View("VideoView", video);
             }
 
+            this._logger?.LogInformation($"Found a creator named {creator.ChannelName}");
             return View(creator);
         }
 
@@ -123,9 +195,9 @@ namespace KittenSignalR.Controllers
             var videos = new List<Video>();
             var creator = this.GetByCreatorHandleOrId(handle);
 
-            await this.EnsureThatCreatorPlaylistUriIsNotNull(creator);
+            creator = await this.EnsureThatCreatorPlaylistUriIsNotNull(creator);
 
-            var videoList = await _videoSourceManager.GetVideosFromCreator(creator, 5);
+            var videoList = await _videoSourceManager.GetVideosFromCreator(creator, 5, 0);
             if (videoList != null)
             {
                 return PartialView("_VideosByCreator", videoList);
@@ -162,6 +234,26 @@ namespace KittenSignalR.Controllers
         {
             var creators = await this.YoutubeLookup(creatorHandle, forceRefresh: true);
             var creator = creators.FirstOrDefault();
+
+            if (creator == null)
+            {
+                return NotFound();
+            }
+
+            return new OkObjectResult($"Refreshed details for {creator.ChannelName}");
+        }
+
+        [HttpPut]
+        [Route("/{creatorHandle}/fiveMore")]
+        public async Task<IActionResult> FiveMore(string creatorHandle)
+        {
+            //this should first get the creators handle, then get the videos from the creator
+            var videos = new List<Video>();
+            var creator = this.GetByCreatorHandleOrId(creatorHandle);
+
+            creator = await this.EnsureThatCreatorPlaylistUriIsNotNull(creator);
+
+            var videoList = await _videoSourceManager.GetVideosFromCreator(creator, 5, 5);
 
             if (creator == null)
             {
@@ -368,7 +460,7 @@ namespace KittenSignalR.Controllers
             return $"{proc.StandardOutput.ReadToEnd()} - {proc.StandardError.ReadToEnd()}";
         }
 
-        private async Task EnsureThatCreatorPlaylistUriIsNotNull(Creator creator)
+        private async Task<Creator> EnsureThatCreatorPlaylistUriIsNotNull(Creator creator)
         {
             //if creator.playlistUri is null we need to refresh the creator object to populate this
             if (null == creator.PlaylistUri)
@@ -389,7 +481,7 @@ namespace KittenSignalR.Controllers
                 Console.WriteLine($"No need to refresh URI, for {creator.ChannelName} and playlist {creator.PlaylistUri}");
             }
 
-            return;
+            return creator;
         }
     }
 }

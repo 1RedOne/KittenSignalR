@@ -26,6 +26,10 @@
                                 onclick="invokeCreatorMethod('@creator.ChannelUrl', 'delete')">
                             Delete Creator
                         </button>
+                        <button class="btn btn-success mt-2"
+                                onclick="invokeCreatorMethod('@creator.ChannelUrl', 'fiveMore')">
+                            Refresh Creator Profile
+                        </button>
                     </div>
                 </div>
                 </li>
@@ -36,7 +40,8 @@
 else
 {
     <p>No videos available for this creator.</p>
-}<script>
+}
+<script>
      function invokeCreatorMethod(channelUrl, method) {
          const requestUrl= `${channelUrl}/${method}`;
 

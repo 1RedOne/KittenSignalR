@@ -1,5 +1,7 @@
 ﻿using KittenSignalR.Models;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.DotNet.Scaffolding.Shared;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,23 +15,28 @@ namespace KittenSignalR.Repositories
         private List<Creator> creatorList;
         private IYouTubeRepo youTubeRepo;
 
-        public VideoSourceManager(IYouTubeRepo youTubeRepo)
+        private ILogger<VideoSourceManager> logger;
+
+        public List<Video> cachedVideos { get; private set; }
+
+        public VideoSourceManager(IYouTubeRepo youTubeRepo, ILogger<VideoSourceManager> logger)
         {
             this.creatorList = GetCreators();
             this.youTubeRepo = youTubeRepo;
+            this.logger = logger;
         }
 
         public async Task<List<Video>> GetVideos(Creator creator)
         {
             //add console logigng that we are loading the list
-            Console.WriteLine($"Loading video list for {creator.ChannelName}");
+            logger?.LogInformation($"Loading video list for {creator.ChannelName}");
 
             //check if creator file exists
             var creatorExpectedPath = $"videos/{creator.ChannelName}.json";
 
             if (!System.IO.File.Exists(creatorExpectedPath))
             {
-                Console.WriteLine($"No video list found for {creator.ChannelName}");
+                logger?.LogWarning($"No video list found for {creator.ChannelName} at {creatorExpectedPath}");
 
                 //call new internal method to retrieve first five videos from creator
                 var videos = await this.GetVideosFromCreator(creator, 5);
@@ -47,7 +54,7 @@ namespace KittenSignalR.Repositories
         public List<Creator> GetCreators()
         {
             //add console logigng that we are loading the list
-            Console.WriteLine("Loading creator list");
+            logger?.LogInformation("Loading creator list");
             var jsonContent = System.IO.File.ReadAllText("creatorList.json");
 
             // Deserialize the JSON into a List<Channel>
@@ -62,13 +69,32 @@ namespace KittenSignalR.Repositories
         /// <param name="creator"></param>
         /// <param name="MaxVideos"></param>
         /// <returns></returns>
-        public async Task<List<Video>> GetVideosFromCreator(Creator creator, int MaxVideos = 5)
+        public async Task<List<Video>> GetVideosFromCreator(Creator creator, int MaxVideos = 5, int AdditionalRequestedVideoCount = 0)
         {
             var cachedResults = this.GetCreatorVideos(creator);
 
-            if (cachedResults.Count > 0)
+            if (cachedResults.Count > 0 && AdditionalRequestedVideoCount < 1)
             {
+                logger?.LogInformation($"found [{cachedResults.Count}] videos for {creator.ChannelName}");
                 return cachedResults;
+            }
+
+            if (AdditionalRequestedVideoCount > 0)
+            {
+                if (MaxVideos < cachedResults.Count)
+                {
+                    MaxVideos = cachedResults.Count + AdditionalRequestedVideoCount;
+                }
+                else
+                {
+                    MaxVideos += AdditionalRequestedVideoCount;
+                }
+
+                logger?.LogInformation($"found [{cachedResults.Count}] videos for {creator.ChannelName}, but we need [{MaxVideos}], contacting youtube!");
+            }
+            else
+            {
+                logger?.LogInformation($"found no cached videos for {creator.ChannelName}, contacting youtube!");
             }
 
             //you youtubeRepo to get first X videos from this creator
@@ -77,6 +103,7 @@ namespace KittenSignalR.Repositories
 
             if (null == result)
             {
+                logger?.LogWarning($"Received no videos for {creator.ChannelName}");
                 return response;
             }
 
@@ -123,16 +150,32 @@ namespace KittenSignalR.Repositories
                 }
 
                 System.IO.File.WriteAllText(creatorExpectedPath, "");
-                Console.WriteLine($"Created new video list for {creator.ChannelName}");
+                logger?.LogInformation($"Created new video list for {creator.ChannelName}");
             }
             else
             {
-                //file already existed, we should read it, and then merge our new results in, and select out the uniques by ID
+                logger?.LogInformation($"Found previous video list for {creator.ChannelName}");
+                var existingJsonContent = System.IO.File.ReadAllText(creatorExpectedPath);
+
+                // Deserialize the JSON into a List<Video>
+                var existingVideos = JsonSerializer.Deserialize<List<Video>>(existingJsonContent);
+                logger?.LogInformation($"Previous list had [{existingVideos.Count}] videos");
+                existingVideos.AddRange(videos);
+
+                logger?.LogInformation($"Present list has [{existingVideos.Count}] videos, deduping...");
+                var dedupe1 = existingVideos.DistinctBy(x => x.VideoId).ToList();
+                var dedupe2 = existingVideos.Distinct().ToList();
+                var deduper3 = existingVideos.GroupBy(t => t.VideoId).Select(grp => grp.First()).ToList();
+
+                logger?.LogInformation($"new merged count of videos is [{dedupe1.Count}]");
+                videos = dedupe1;
             }
 
             //we need to use this property when serializing WriteIndented = true
             var serializerOptions = new JsonSerializerOptions { WriteIndented = true };
             var jsonContent = JsonSerializer.Serialize(videos, serializerOptions);
+
+            logger?.LogInformation($"Commiting new video list count of [{videos.Count}]");
 
             System.IO.File.WriteAllText(creatorExpectedPath, jsonContent);
         }
@@ -144,6 +187,8 @@ namespace KittenSignalR.Repositories
 
             var response = new List<Video>();
 
+            logger?.LogInformation($"Found [{videoFiles.Count()}] video files");
+
             foreach (var videoFile in videoFiles)
             {
                 var jsonContent = System.IO.File.ReadAllText(videoFile);
@@ -154,7 +199,21 @@ namespace KittenSignalR.Repositories
                 response.AddRange(creatorVideos);
             }
 
+            logger?.LogInformation($"Found [{response.Count()}] videos");
+
+            this.cachedVideos = response;
             return response;
+        }
+
+        public Video GetVideo(string videoId)
+        {
+            if (null == cachedVideos)
+            {
+                _=this.GetVideos();
+            }
+            var matchingVideo = this.cachedVideos.Where(x => x.VideoId == videoId).FirstOrDefault();
+
+            return matchingVideo;
         }
 
         public List<Video> SetNewVideoFromCreator(Video video, Creator creator) => throw new NotImplementedException();
