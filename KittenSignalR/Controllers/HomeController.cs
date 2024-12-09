@@ -1,10 +1,14 @@
 ﻿using KittenSignalR.Hubs;
 using KittenSignalR.Models;
+using KittenSignalR.Repositories;
 using Medallion.Shell;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
+using NUglify.JavaScript.Syntax;
+using PictureAuth.Models;
+using PictureAuth.Repo;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -19,7 +23,7 @@ using static KittenSignalR.Models.Video;
 
 namespace KittenSignalR.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseControllerWithUserName
     {
         private readonly ILogger<HomeController> _logger;
         private int executionCount = 0;
@@ -29,8 +33,10 @@ namespace KittenSignalR.Controllers
         private readonly IVideoSourceManager _videoSourceManager;
         private List<Creator> creators;
         private readonly IHubContext<ChatHub> _hubContext;
+        private readonly FoxUserManager foxUserManager;
 
-        public HomeController(ILogger<HomeController> logger, IHubContext<ChatHub> hubContext, IYouTubeRepo youTubeRepo, ICreatorSourceManager creatorSourceManager, IVideoSourceManager videoSourceManager)
+        public HomeController(ILogger<HomeController> logger, IHubContext<ChatHub> hubContext, IYouTubeRepo youTubeRepo, ICreatorSourceManager creatorSourceManager, IVideoSourceManager videoSourceManager, IShoppingCartManager shoppingCartManager, FoxUserManager foxUserManager)
+            : base(shoppingCartManager, foxUserManager, logger)
         {
             _logger = logger;
             _hubContext = hubContext;
@@ -106,6 +112,10 @@ namespace KittenSignalR.Controllers
             return Ok(videoList);
         }
 
+        [Route("/youTubeView")]
+        [HttpGet]
+        public IActionResult YouTubeView() => this.GetVideos2();
+
         [Route("/videos2/api")]
         [HttpGet]
         public IActionResult GetVideos2Api()
@@ -165,7 +175,7 @@ namespace KittenSignalR.Controllers
                 {
                     return NotFound();
                 }
-                
+
                 this._logger?.LogInformation($"Found a Video ID of {videoId}, {video.VideoTitle}");
                 return View("VideoView", video);
             }
@@ -210,6 +220,11 @@ namespace KittenSignalR.Controllers
             }
 
             return PartialView("_VideosByCreator", videos);
+        }
+
+        public async Task<IActionResult> GetVideosByCart(ShoppingCart cart)
+        {
+            return PartialView("_VideosByCart", cart.OrderItems);
         }
 
         [HttpPut]

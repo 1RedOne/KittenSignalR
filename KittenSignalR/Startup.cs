@@ -12,6 +12,8 @@ using KittenSignalR.Hubs;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
 using KittenSignalR.Repositories;
+using PictureAuth.Auth;
+using PictureAuth.Repo;
 
 namespace KittenSignalR
 {
@@ -33,10 +35,12 @@ namespace KittenSignalR
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddSignalR();
             services.AddDirectoryBrowser();
-
+            services.AddSingleton<FoxUserManager>();
             services.AddHttpClient<IYouTubeRepo, YouTubeRepo>();
             services.AddSingleton<ICreatorSourceManager, CreatorSourceManager>();
             services.AddSingleton<IVideoSourceManager, VideoSourceManager>();
+            services.AddSingleton<IShoppingCartManager, ShoppingCartManager>();
+
             services.ConfigureYoutubeOptions();
         }
 
@@ -57,7 +61,7 @@ namespace KittenSignalR
             app.UseHttpsRedirection();
             app.UseDefaultFiles();
             app.UseStaticFiles();
-
+            app.UseMiddleware<RequiresPictureAuthMiddleware>();
             app.UseRouting();
 
             app.UseAuthorization();

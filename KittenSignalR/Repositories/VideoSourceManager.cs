@@ -120,7 +120,8 @@ namespace KittenSignalR.Repositories
         private List<Video> GetCreatorVideos(Creator creator)
         {
             //check local dir for creator.handle with spaces removed .json file, if exists, then parse to Videos format and return
-            var creatorExpectedPath = $"videos/{creator.ChannelName}.json";
+            var sanitizedCreatorName = this.SanitizedCreatorChannelName(creator);
+            var creatorExpectedPath = $"videos/{sanitizedCreatorName}.json";
             var response = new List<Video>();
 
             if (!System.IO.File.Exists(creatorExpectedPath))
@@ -138,10 +139,13 @@ namespace KittenSignalR.Repositories
 
         private void AddCreatorVideos(Creator creator, List<Video> videos)
         {
-            var creatorExpectedPath = $"videos/{creator.ChannelName}.json";
+            var creatorChannelNameSafe = this.SanitizedCreatorChannelName(creator);
+            var creatorExpectedPath = $"videos/{creatorChannelNameSafe}.json";
 
             if (!System.IO.File.Exists(creatorExpectedPath))
             {
+                logger?.LogInformation($"No video list found for {creator.ChannelName} as {creatorChannelNameSafe}");
+
                 //create file
                 //test for videos dir and if missing then create
                 if (!System.IO.Directory.Exists("videos"))
@@ -150,11 +154,11 @@ namespace KittenSignalR.Repositories
                 }
 
                 System.IO.File.WriteAllText(creatorExpectedPath, "");
-                logger?.LogInformation($"Created new video list for {creator.ChannelName}");
+                logger?.LogInformation($"Created new video list for {creator.ChannelName} as {creatorChannelNameSafe}");
             }
             else
             {
-                logger?.LogInformation($"Found previous video list for {creator.ChannelName}");
+                logger?.LogInformation($"Found previous video list for {creator.ChannelName} as {creatorChannelNameSafe}");
                 var existingJsonContent = System.IO.File.ReadAllText(creatorExpectedPath);
 
                 // Deserialize the JSON into a List<Video>
@@ -164,8 +168,6 @@ namespace KittenSignalR.Repositories
 
                 logger?.LogInformation($"Present list has [{existingVideos.Count}] videos, deduping...");
                 var dedupe1 = existingVideos.DistinctBy(x => x.VideoId).ToList();
-                var dedupe2 = existingVideos.Distinct().ToList();
-                var deduper3 = existingVideos.GroupBy(t => t.VideoId).Select(grp => grp.First()).ToList();
 
                 logger?.LogInformation($"new merged count of videos is [{dedupe1.Count}]");
                 videos = dedupe1;
@@ -178,6 +180,18 @@ namespace KittenSignalR.Repositories
             logger?.LogInformation($"Commiting new video list count of [{videos.Count}]");
 
             System.IO.File.WriteAllText(creatorExpectedPath, jsonContent);
+        }
+
+        private string SanitizedCreatorChannelName(Creator creator)
+        {
+            //take creator.ChannelName and strip these chars from it '@','!','?'
+            this.logger?.LogInformation($"Creator name was {creator.ChannelName}");
+            string creatorChannelNameSafe = creator.ChannelName.Replace("@", "")
+                                                  .Replace("!", "")
+                                                  .Replace("?", "");
+
+            this.logger?.LogInformation($"Sanitized name is {creatorChannelNameSafe}");
+            return creatorChannelNameSafe;
         }
 
         public List<Video> GetVideos()
@@ -205,11 +219,16 @@ namespace KittenSignalR.Repositories
             return response;
         }
 
+        /// <summary>
+        /// Returns a requested video from the cache if possible.  If not, queries youtube.  If we can't find it, we return null
+        /// </summary>
+        /// <param name="videoId"></param>
+        /// <returns></returns>
         public Video GetVideo(string videoId)
         {
             if (null == cachedVideos)
             {
-                _=this.GetVideos();
+                _ = this.GetVideos();
             }
             var matchingVideo = this.cachedVideos.Where(x => x.VideoId == videoId).FirstOrDefault();
 

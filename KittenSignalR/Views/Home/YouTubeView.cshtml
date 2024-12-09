@@ -3,6 +3,18 @@
     ViewData["Title"] = $"Youtube View of all Creators";
 }
 
+<div class="container mt-4 right">
+    <div class="form-group">
+        <label for="searchBox">Search for a Channel:</label>
+        <input type="text"
+               id="searchBox"
+               class="form-control"
+               placeholder="Type to search..."
+               oninput="getAutocompleteResults(this.value)" />
+    </div>
+    <ul id="autocompleteResults" class="list-group mt-2"></ul>
+</div>
+
 <div class="container">
     @foreach (var creatorGroup in Model)
     {
@@ -23,7 +35,7 @@
                         <a href="@video.VideoId"><h4>@video.VideoTitle</h4></a>
                         <p>Published @video.GetDateAgo()</p>
                         <button class="btn btn-success add-to-cart"
-                                onclick="invokeItemMethod('@video.VideoId', 'addToCart')">
+                                onclick="invokeShoppingMethod('@video.VideoId', 'addToCart')">
                             🛒 Add to cart
                         </button>
                     </div>
@@ -95,31 +107,3 @@
         border-radius: 3px;
     }
 </style>
-<script>
-    function invokeCreatorMethod(channelUrl, method) {
-        const requestUrl = `${channelUrl}/${method}`;
-
-        // Send the PUT request
-        fetch(requestUrl, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            // Optionally include a body if your API expects data
-            body: JSON.stringify({ reason: 'User initiated deletion' }),
-        })
-            .then(response => {
-                if (response.ok) {
-                    alert('Creator ${method} called successfully!');
-                    // Optionally refresh the page or redirect
-                    window.location.reload();
-                } else {
-                    alert('Failed to ${method} this creator.');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('An error occurred while trying to ${method} the creator.');
-            });
-    }
-</script>

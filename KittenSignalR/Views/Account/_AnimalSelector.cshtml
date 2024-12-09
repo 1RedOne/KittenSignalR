@@ -1,0 +1,129 @@
+﻿<style>
+    .image-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center; /* Centers the rows */
+        gap: 20px; /* Adds spacing between items */
+        max-width: 400px; /* Adjust to fit the number of items */
+        margin: 0 auto; /* Centers the grid on the page */
+    }
+
+        .image-grid .box {
+            width: 120px;
+            height: 120px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            cursor: pointer;
+            background-color: #f9f9f9;
+        }
+</style>
+
+<div class="selection-container" id="animalSelection">
+    <h3>Select Your password animal</h3>
+    <div class="image-grid">
+        <!-- Row 1 -->
+        <div class="box">
+            <img src="/images/joker.png" alt="Joker" width="120" height="120">
+        </div>
+        <div class="box">
+            <img src="/images/cat.png" alt="Cat" width="120" height="120">
+        </div>
+        <div class="box">
+            <img src="/images/dog.png" alt="Dog" width="120" height="120">
+        </div>
+
+        <!-- Row 2 -->
+        <div class="box">
+            <img src="/images/fox.png" alt="Fox" width="120" height="120">
+        </div>
+        <div class="box">
+            <img src="/images/squirrel.png" alt="Squirrel" width="120" height="120">
+        </div>
+        <div class="box">
+            <img src="/images/raccoon.png" alt="Raccoon" width="120" height="120">
+        </div>
+    </div>
+</div>
+<h3>Select Your password color</h3>
+<!-- Color Selection -->
+<div class="selection-container" id="colorSelection">
+    <div class="box color" data-value="teal" style="background-color: teal;"></div>
+    <div class="box color" data-value="silver" style="background-color: silver;"></div>
+    <div class="box color" data-value="blue" style="background-color: blue;"></div>
+    <div class="box color" data-value="pink" style="background-color: pink;"></div>
+    <div class="box color" data-value="green" style="background-color: green;"></div>
+    <div class="box color" data-value="orange" style="background-color: orange;"></div>
+</div>
+
+<script>
+    let selectedAnimal = null;
+    let selectedColor = null;
+    let resultantPassword = null;
+
+    // Add event listeners for animals
+    // document.getElementById('animalSelection').addEventListener('click', (event) => {
+    //     if (event.target.closest('.box')) {
+    //         const selectedBox = event.target.closest('.box');
+    //         document.querySelectorAll('#animalSelection .box').forEach(box => box.classList.remove('selected'));
+    //         selectedBox.classList.add('selected');
+    //         selectedAnimal = selectedBox.dataset.value;
+    //         console.log('Selected Animal:', selectedAnimal);
+
+    //         if (null!=selectedColor){
+    //             console.log("resultant password is " + selectedColor + selectedAnimal);
+    //         }
+    //     }
+    // });
+       document.querySelector('.image-grid').addEventListener('click', (event) => {
+        const clickedBox = event.target.closest('.box'); // Ensure we target the parent `.box`
+        if (clickedBox) {
+            // Clear previous selection
+            document.querySelectorAll('.image-grid .box').forEach(box => box.classList.remove('selected'));
+
+            // Mark the clicked box as selected
+            clickedBox.classList.add('selected');
+
+            // Get the value from the `data-value` attribute of the clicked box
+            selectedAnimal = clickedBox.querySelector('img').alt.toLowerCase(); // Use the `alt` tag as the value
+            console.log('Selected Animal:', selectedAnimal);
+            if (null != selectedColor) {
+                
+                resultantPassword = selectedColor + selectedAnimal;
+                
+                console.log("resultant password is " + resultantPassword);
+                
+                // Update the value of the Password textbox
+                const passwordTextbox = document.getElementById('Password');
+                passwordTextbox.value = resultantPassword;
+            }
+        }
+    });
+
+    // Add event listeners for colors
+    document.getElementById('colorSelection').addEventListener('click', (event) => {
+        if (event.target.closest('.box')) {
+            const selectedBox = event.target.closest('.box');
+            document.querySelectorAll('#colorSelection .box').forEach(box => box.classList.remove('selected'));
+            selectedBox.classList.add('selected');
+            selectedColor = selectedBox.dataset.value;
+            console.log('Selected Color:', selectedColor);
+
+            if (null != selectedAnimal) {
+                resultantPassword = selectedColor + selectedAnimal;
+
+                console.log("resultant password is " + resultantPassword);
+
+                // Update the value of the Password textbox
+                const passwordTextbox = document.getElementById('Password');
+                passwordTextbox.value = resultantPassword;
+            }
+        }
+    });
+
+    // You can combine the selections for further processing:
+    // e.g., `console.log('Final Selection:', selectedColor + selectedAnimal);`
+</script>

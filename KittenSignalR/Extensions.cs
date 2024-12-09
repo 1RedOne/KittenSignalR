@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System;
+using PictureAuth.Models;
 
 namespace KittenSignalR
 {
@@ -15,6 +16,18 @@ namespace KittenSignalR
                     yield return element;
                 }
             }
+        }
+
+        public static bool IsAdmin(this RegisterDto user)
+        {
+            var adminNames = new List<string> { "admin", "administrator", "stephen", "root", "lindsey" };
+
+            if (adminNames.Contains(user.Name.ToLower()))
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

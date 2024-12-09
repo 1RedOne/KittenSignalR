@@ -11,7 +11,7 @@
              alt="Thumbnail"
              style="width: 100%; height: auto; object-fit: cover;">
         <div class="card-body">            
-            <p class="card-text">@Model.VideoDescription</p>
+            <p class="card-text"><pre>@Model.VideoDescription</pre></p>
             <a href="@Model.CreatorChannelName" class="btn btn-info" target="_blank">Visit Channel</a>
             <button class="btn btn-success add-to-cart"
                     onclick="invokeShoppingMethod('@Model.VideoUrl', 'addToCart')">
@@ -25,35 +25,20 @@
     </div>
 </div>
 
-<script>   
-
-    function invokeShoppingMethod(channelUrl, method) {
-        const requestUrl = `${channelUrl}/${method}`;
-        const message = 'Would be adding {channelUrl} to shopping cart.';
-        alert(message);
-        return;
-
-        // Send the PUT request
-        fetch(requestUrl, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            // Optionally include a body if your API expects data
-            body: JSON.stringify({ reason: 'User initiated deletion' }),
-        })
-            .then(response => {
-                if (response.ok) {
-                    alert('Creator ${method} called successfully!');
-                    // Optionally refresh the page or redirect
-                    window.location.reload();
-                } else {
-                    alert('Failed to ${method} this creator.');
-                }
+<script>
+    // Load the partial view dynamically
+    document.addEventListener("DOMContentLoaded", function () {
+        const handle = "@Model.CreatorChannelName"; // Use the ChannelId as the handle
+        fetch(`/Home/GetVideosByCreatorHandle?handle=${encodeURIComponent(handle)}`)
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById("videosContainer").innerHTML = html;
             })
             .catch(error => {
-                console.error('Error:', error);
-                alert('An error occurred while trying to ${method} the creator.');
+                console.error("Error loading videos:", error);
+                document.getElementById("videosContainer").innerHTML = "<p>Failed to load videos.</p>";
             });
-    }
+    });
+
+    
 </script>

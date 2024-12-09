@@ -8,11 +8,16 @@ Test project to upload a zip file and then return results back to use immediatel
 [ ] Improve landing experience to show Plex
 [ ] Add Approval Flow
 [ ] Creator view model should be updated to have approval grid
+[ ] Make sure videos actually download at the end
+[ ] Add 'Live youtube homepage'
+[ ] Figure out why Creator page looks weird
 [ ] Add 'My Videos' concept
-[ ] Figure out shopping carts
-[ ] User account login should be custom of 'pick color plus animal' and then show the rendered result
-[ ] Add user accounts
-[ ] Fix 'Add to cart' link appearing in a wierd place
+[ ] Should be able to see all of my old videos
+[ ] Should be able to 'Submit' an order
+[x] Figure out shopping carts
+[x] User account login should be custom of 'pick color plus animal' and then show the rendered result
+[x] Add user accounts
+[x] Fix 'Add to cart' link appearing in a wierd place
 [x] Creator view should be support getting 'five more videos' and merging them
 [x] Update all videos view to include 'Creators' stream as well
 [x] Fix 'Bad Request' on first time loading a playlist for a creator

@@ -1,0 +1,83 @@
+﻿@model IEnumerable<KittenSignalR.Models.ShoppingCart>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActiveOrder)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderApproved)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderFulfilled)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActiveOrder)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderApproved)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderFulfilled)
+            </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderItems)
+                    </td>
+                    @foreach (var vide in item.OrderItems)
+                    {
+                        <td>
+                        <span>@vide.VideoTitle</span>
+                        </td>
+                    }
+
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.OrderNumberId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.OrderNumberId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.OrderNumberId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</body>
+</html>

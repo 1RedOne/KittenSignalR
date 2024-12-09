@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - KittenSignalR</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <script src="~/js/autocompleteandcreatorutils.js"></script>
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
@@ -25,11 +26,39 @@
                             <a class="nav-link" href="http://localhost:32400/web/index.html#!/media/e7820fac2c6bc2e20037b686579a3c703319348a/com.plexapp.plugins.library?key=%2Fhubs%2Fsections%2F10&pageType=hub&context=content.discover&source=%2Fhubs%2Fsections%2F10">Plex</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Ham">Ham🐖</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="youTubeView">YouTube</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="YouTubeDownload">🚀YoutubeDownload🚀</a>
-                        </li>
+                    @* </ul>
+                    <ul> *@
+
+
+                        
+
+                            @if (ViewData["UserName"] != null)
+                            {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Index">Hi, @ViewData["UserName"]!</a>                                
+                                </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Account" asp-action="LogMeOut">Logout</a>
+                            </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Login">Login </a>
+                                </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                                </li>
+                            }
+                        @if (ViewData["UserName"] != null)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link right" asp-area="" asp-controller="ShoppingCart" asp-action="Index">Cart (@ViewData["ItemCount"])</a>
+                            </li>    
+                        }
+                                            
                     </ul>
                 </div>
             </div>

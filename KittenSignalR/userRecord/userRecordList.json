@@ -1,0 +1,16 @@
+[
+  {
+    "name": "stephen",
+    "password": "silverfox",
+    "dateOfBirth": "1984-7-15 00:01 AM",
+    "Id": 0,
+    "AuthToken": 1451718534
+  },
+  {
+    "name": "CatMan",
+    "password": "orangecat",
+    "dateOfBirth": "1980-6-1 00:01 AM",
+    "Id": 1,
+    "AuthToken": 1933281725
+  }
+]

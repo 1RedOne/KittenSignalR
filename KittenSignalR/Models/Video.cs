@@ -25,6 +25,9 @@ namespace KittenSignalR.Models
 
         public DateTime CreatedDate { get; set; }
 
+        public bool IsLive { get; set; }
+        public string PlexUrl { get; set; }
+
         public Video(YouTubeVideoResult videoResult, Creator creator)
         {
             this.CreatorId = creator.ChannelId;

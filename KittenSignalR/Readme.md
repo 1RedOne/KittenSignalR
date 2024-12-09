@@ -8,9 +8,11 @@
 [ ] Creator view model should be updated to have approval grid
 [ ] Add 'My Videos' concept
 [ ] Figure out shopping carts
-[ ] User account login should be custom of 'pick color plus animal' and then show the rendered result
-[ ] Add user accounts
-[ ] Add 'Video View' for single videos
+[ ] Add Logout / Login 
+[x] User account login should be custom of 'pick color plus animal' and then show the rendered result
+[x] Add user accounts
+[x] Add 'Video View' for single videos
+[x] Fix can't handle creators with symbols in name
 [x] Fix 'Add to cart' link appearing in a wierd place
 [x] Creator view should be support getting 'five more videos' and merging them
 [x] Make a 'YouTube' view
