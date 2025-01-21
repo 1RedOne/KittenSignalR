@@ -34,7 +34,7 @@ namespace KittenSignalR.Repositories
             this.EnsureShoppingCartListReady();
 
             this.logger?.LogInformation("Loading shopping cart list");
-            var jsonContent = System.IO.File.ReadAllText(this.cartExpectedPath);
+            string jsonContent = this.GetShoppingCartFileSafe();
 
             if (string.IsNullOrWhiteSpace(jsonContent))
             {
@@ -46,6 +46,30 @@ namespace KittenSignalR.Repositories
             this.logger?.LogInformation($"Online with ${warmingShoppingCartList.Count} carts");
 
             return warmingShoppingCartList;
+        }
+
+        private string GetShoppingCartFileSafe()
+        {
+            //for up to five times, try this
+            for (int i = 0; i < 5; i++)
+            {
+                try
+                {
+                    return System.IO.File.ReadAllText(this.cartExpectedPath);
+                }
+                catch (Exception ex)
+                {
+                    this.logger?.LogError($"Error reading file {this.cartExpectedPath}, attempt {i + 1} of 5");
+                    this.logger?.LogError(ex.Message);
+
+                    //get random number between 1 and 5
+                    Random random = new Random();
+                    int randomNumber = random.Next(1, 5);
+
+                    System.Threading.Thread.Sleep(45 * randomNumber);
+                }
+            }
+            return System.IO.File.ReadAllText(this.cartExpectedPath);
         }
 
         private void EnsureShoppingCartListReady()

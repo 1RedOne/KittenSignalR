@@ -33,7 +33,7 @@ namespace KittenSignalR.Models
             this.Title = snippet.title;
             this.Description = snippet.description;
             this.CustomUrl = snippet.customUrl;
-            this.ThumbnailUrl = snippet.thumbnails.@default.url;
+            this.ThumbnailUrl = snippet.thumbnails.medium.url;
             this.linkedPlaylists = details.relatedPlaylists;
         }
     }

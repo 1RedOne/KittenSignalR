@@ -2,8 +2,15 @@
 
 Test project to upload a zip file and then return results back to use immediately over SingalR while we process the zip file
 
-## To Do 
+## Bug Fix 
 
+[ ] Add all videos to cart does nothing
+- - Should instead call with special method to get all videos for creator and add to order
+
+[ ] Watch Video button from Creator view does nothing
+- - Should instead xfer to video view
+
+## To Do 
 
 [ ] Improve landing experience to show Plex
 [ ] Add Approval Flow
